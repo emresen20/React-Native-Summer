@@ -3,7 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const Slice = createSlice({
     name:"counter",
     initialState:{  // global statemiz bu  (başlangıç state)
-        count:0
+        count:0,
+        author:{
+            name:"Emre",
+            surname:"Shen",
+        }
     },
     reducers:{  // stateye etki edicek fonksiyonlar
         increase(state){
@@ -15,8 +19,16 @@ const Slice = createSlice({
         },
         refresh(state){
             state.count=0;
+        },
+        setAuthor(state,action){  // fonksiyonun gelecek değeri belli değil ise action ile kullanılır
+            const name=action.payload.name;  // payload değişecek statenin yeni bilgilerini taşır
+            const surname=action.payload.surname;
+
+            state.author.name=name;
+            state.author.surname=surname;
+
         }
     }
 })
 export default Slice;
-export const {decrease,increase,refresh} =Slice.actions
+export const {decrease,increase,refresh,setAuthor} =Slice.actions

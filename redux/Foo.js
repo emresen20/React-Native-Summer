@@ -9,6 +9,9 @@ const Foo = () => {
       <Text>
         {mevcut.count}
       </Text>
+      <Text>
+      {mevcut.author.name}
+      </Text>
     </View>
   )
 }

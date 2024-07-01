@@ -1,12 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { Store } from './Store';
+import { Counter } from './Counter';
+import Foo from './Foo';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    //Provideri redux u kullanabilmek için sarmış olduk
+    <Provider store={Store} > 
+      <View style={styles.container}>
+        <Foo/>
+          <Counter/>
+        <StatusBar style="auto" />
+      </View>
+    </Provider>
   );
 }
 

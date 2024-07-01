@@ -21,6 +21,8 @@ const Slice = createSlice({
             state.count=0;
         },
         setAuthor(state,action){  // fonksiyonun gelecek değeri belli değil ise action ile kullanılır
+            //buradaki state initialstatedeki veriler temsil eder o yüzden state.author.name bu şekilde çağırmış oluyuorz
+            // action ise güncellenmesine yarayan her zaman kullanılması gereken bir yapıdır
             const name=action.payload.name;  // payload değişecek statenin yeni bilgilerini taşır
             const surname=action.payload.surname;
 

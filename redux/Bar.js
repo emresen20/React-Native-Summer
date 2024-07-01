@@ -18,6 +18,7 @@ const Bar = () => {
         name:"Berna",
         surname:"Varol"
       }))}/>
+      <Text>Sayaç bar:{author.count}</Text>
     </View>
   )
 }

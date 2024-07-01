@@ -7,7 +7,7 @@ const Foo = () => {
   return (
     <View>
       <Text>
-        {mevcut.count}
+       Foo  {mevcut.count}
       </Text>
       <Text>
       {mevcut.author.name}

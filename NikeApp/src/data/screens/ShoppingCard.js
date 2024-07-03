@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, SafeAreaView, FlatList, StyleSheet, Pressable } from 'react-native'
 import card from '../card'
 import CartListItem from '../components/CartListItem'
+import { useSelector } from 'react-redux';
 
 
  const ShoppingCardTotals = () => (
@@ -26,10 +27,11 @@ import CartListItem from '../components/CartListItem'
  );
 
 const ShoppingCard = () => {
+  const carItems=useSelector(state => state.cart.items)
   return (
     <>
 
-      <FlatList data={card} renderItem={({ item }) => <CartListItem cartItem={item} />}
+      <FlatList data={carItems} renderItem={({ item }) => <CartListItem cartItem={item} />}
 
         //Bu özellik, listenin en üstüne sabit bir bileşen eklemek istediğinizde kullanışlıdır
         ListFooterComponent={ShoppingCardTotals}

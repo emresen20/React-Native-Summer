@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image, FlatList, useWindowDimensions, ScrollView } from 'react-native'
+import { View, StyleSheet, Text, Image, FlatList, useWindowDimensions, ScrollView, Pressable } from 'react-native'
 
 import products from '../products'
 
 const ProductsDetailScreen = () => {
+
+
     const product = products[0];
 
     const { width } = useWindowDimensions();
@@ -12,9 +14,14 @@ const ProductsDetailScreen = () => {
     //yüksekliği (height) alınır ve bu değerler ekranda görüntülenir.
     // Ekran boyutları değiştiğinde (örneğin, cihaz döndürüldüğünde), 
     //bu değerler otomatik olarak güncellenir ve bileşen yeniden render edilir.
+
+
+    const adTooCard= ()=>{
+        console.log("add to card")
+    }
     return (
         <View>
-            <ScrollView>
+            <ScrollView style={{marginBottom:60}}>
 
 
                 <FlatList
@@ -39,6 +46,10 @@ const ProductsDetailScreen = () => {
                 </View>
             </ScrollView>
 
+            <Pressable style={styles.button} onPress={adTooCard}>
+                <Text style={styles.buttontext}>Add to card</Text>
+            </Pressable>
+
 
 
         </View>
@@ -58,9 +69,26 @@ const styles = StyleSheet.create({
     },
     description: {
         marginVertical: 10, // üst ve alt kenarlara 20 birimlik marj ekler
-        fontSize: 18,
+        fontSize: 17,
         lineHeight: 30, // satır yüksekliği için kullanılır çok metin varsa kullan
-        fontWeight: '300'
+        fontWeight: '300',
+        
+    },
+    button:{
+        position:"absolute",
+        backgroundColor:"black",
+        bottom:30,
+        width:'90%',
+        alignSelf:"center",
+        padding:17,
+        borderRadius:100,
+        alignItems:"center"
+
+    },
+    buttontext:{
+        color:"white",
+        fontWeight:'500',
+        fontSize:16
     }
 
 });

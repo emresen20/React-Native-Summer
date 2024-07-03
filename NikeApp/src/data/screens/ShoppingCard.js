@@ -1,11 +1,11 @@
 import React from 'react'
-import { View,Text, SafeAreaView } from 'react-native'
+import { View,Text, SafeAreaView,FlatList } from 'react-native'
+import card from '../card'
+import CartListItem from '../components/CartListItem'
 
 const ShoppingCard = () => {
   return (
-    <SafeAreaView>
-      <Text>ShoppingCard</Text>
-    </SafeAreaView>
+    <FlatList data={card}  renderItem={({item}) => <CartListItem cartItem={item}/>}/>
   )
 }
 

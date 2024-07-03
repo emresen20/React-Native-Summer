@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, SafeAreaView } from 'react-native';
 
 import ProductsScreen from './src/data/screens/ProductsScreen';
 import ProductsDetailScreen from './src/data/screens/ProductsDetailScreen';
+import ShoppingCard from './src/data/screens/ShoppingCard';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ProductsDetailScreen/>
+    <SafeAreaView style={styles.container}>
+      <ShoppingCard/>
 
-    </View>
+    </SafeAreaView>
   );
 }
 

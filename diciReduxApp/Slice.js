@@ -20,8 +20,10 @@ const Slice =createSlice({
     ],
     reducers:{
         add(state,action){
+            console.log("state",state)
             const word=action.payload;
             state.push(word)
+            
         }
     }
     

@@ -7,8 +7,10 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { Store } from "./Store";
 import { add } from "./Slice";
 
+
 export default function App() {
   const [modal, setModal] = useState(false);
+
 
   return (
   <Provider store={Store}>
@@ -39,9 +41,7 @@ const Word = () => {
     }
   }
 
-  useEffect(()=>{
-    console.log(dictionary)
-  })
+
   return (
     <>
       <Text style={Style.words}>

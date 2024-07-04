@@ -1,20 +1,25 @@
-import React from 'react'
-import { View, Text, SafeAreaView, FlatList, StyleSheet, Pressable } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, SafeAreaView, FlatList, StyleSheet, Pressable, Modal, TouchableOpacity } from 'react-native'
 import card from '../card'
 import CartListItem from '../components/CartListItem'
 import { useSelector } from 'react-redux';
 import { selectDeliveryPrice, selectSubtotal, selectTotal } from '../../store/cardSlices';
 
 
- const ShoppingCardTotals = () => {
+ const ShoppingCardTotals = ({ setOpenModal }) => {
   const subtotal = useSelector(selectSubtotal)
   const total = useSelector(selectTotal)
 
   const deliveryFee= useSelector(selectDeliveryPrice);
 
+ 
+
+  
+
   return(
 
   <View style={styles.totalsContainer}>
+    
 
     <View style={styles.row}>
       <Text style={styles.text}>Subtotal</Text>
@@ -35,7 +40,24 @@ import { selectDeliveryPrice, selectSubtotal, selectTotal } from '../../store/ca
  )};
 
 const ShoppingCard = () => {
+  const [openModal,setOpenModal]= useState(false);
   const carItems=useSelector(state => state.cart.items)
+  const totals= useSelector(selectTotal)
+
+  const ThxModal= ()=>{
+    return(
+      <Modal visible={openModal} transparent={true} animationType="slide">
+        <View style={{height:200,width:300,backgroundColor:"orange",justifyContent:"center",alignItems:"center", alignSelf:"center",marginTop:350}}>
+        <Text>Thanks For Shopping</Text>
+        <TouchableOpacity onPress={()=> setOpenModal(false)}>
+          <Text>Close</Text>
+        </TouchableOpacity>
+        
+      </View>
+      </Modal>
+      
+    )
+  }
   return (
     <>
 
@@ -45,8 +67,9 @@ const ShoppingCard = () => {
         ListFooterComponent={ShoppingCardTotals}
 
       />
+      <ThxModal/>
       <Pressable style={styles.button} >
-        <Text style={styles.buttontext}>CheckOut</Text>
+        <Text style={styles.buttontext} onPress={()=> setOpenModal(true)}>CheckOut</Text>
       </Pressable>
     </>
   )

@@ -17,12 +17,13 @@ const Navigation = ({navigation}) => {
     const NumberOfItems=useSelector(selectNumberOfItems);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{contentStyle:{backgroundColor:'white'}}}>
+        <NavigationContainer >
+            <Stack.Navigator screenOptions={{contentStyle:{backgroundColor:'white'},headerShown:false}}>
                 <Stack.Screen
+                    
                     name='Products'
                     component={ProductsScreen}
-                    options={({navigation}) =>({
+                    options={ ({navigation}) =>({
                         headerRight: () => (
                             <Pressable onPress={() => navigation.navigate("Card")} style={{flexDirection:"row"}}>
                                 <FontAwesome5 name="shopping-cart" size={18} color="gray" />

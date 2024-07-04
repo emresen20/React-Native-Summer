@@ -3,28 +3,36 @@ import { View, Text, SafeAreaView, FlatList, StyleSheet, Pressable } from 'react
 import card from '../card'
 import CartListItem from '../components/CartListItem'
 import { useSelector } from 'react-redux';
+import { selectDeliveryPrice, selectSubtotal, selectTotal } from '../../store/cardSlices';
 
 
- const ShoppingCardTotals = () => (
+ const ShoppingCardTotals = () => {
+  const subtotal = useSelector(selectSubtotal)
+  const total = useSelector(selectTotal)
+
+  const deliveryFee= useSelector(selectDeliveryPrice);
+
+  return(
+
   <View style={styles.totalsContainer}>
 
     <View style={styles.row}>
       <Text style={styles.text}>Subtotal</Text>
-      <Text style={styles.text}>410</Text>
+      <Text style={styles.text}>{subtotal}</Text>
     </View>
 
     <View style={styles.row}>
       <Text style={styles.text}>Delivery</Text>
-      <Text style={styles.text}>410</Text>
+      <Text style={styles.text}>{deliveryFee}</Text>
     </View>
 
     <View style={styles.row}>
       <Text style={styles.textBold}>Total</Text>
-      <Text style={styles.textBold}>410</Text>
+      <Text style={styles.textBold}>{total}</Text>
     </View>
   </View>
 
- );
+ )};
 
 const ShoppingCard = () => {
   const carItems=useSelector(state => state.cart.items)

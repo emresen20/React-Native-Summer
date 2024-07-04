@@ -1,10 +1,11 @@
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Style } from "./Style";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { Store } from "./Store";
+import { add } from "./Slice";
 
 export default function App() {
   const [modal, setModal] = useState(false);
@@ -26,25 +27,47 @@ export default function App() {
 }
 
 const Word = () => {
+  const dictionary= useSelector((state)=> state.dictionary);
+  const [index,SetIndex]=useState(0);
+
+  const move=(where)=>{
+    if(where==="next"){
+      SetIndex((prev) => prev+1)
+    }
+    else{
+      SetIndex((prev)=> prev-1)
+    }
+  }
+
+  useEffect(()=>{
+    console.log(dictionary)
+  })
   return (
     <>
       <Text style={Style.words}>
-        2 <AntDesign name="heart" size={40} color="red" />f
-        <Text style={Style.current}> 100</Text>
+        {index+1} <AntDesign name="heart" size={40} color="blue" />f
+        <Text style={Style.current}> {dictionary.length}</Text>
       </Text>
 
       <View style={Style.word}>
         <View style={Style.wordSegment}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => {
+            if(index == 0){
+              return;
+            }
+            move("back")}}>
             <AntDesign name="left" size={30} color="black" />
           </TouchableOpacity>
         </View>
         <View style={[Style.wordSegment, { flex: 3 }]}>
-          <Text style={Style.en}> Arbitrary </Text>
-          <Text style={Style.tr}>Rastgele</Text>
+          <Text style={Style.en}> {dictionary[index].en } </Text>
+          <Text style={Style.tr}>{dictionary[index].tr}</Text>
         </View>
         <View style={Style.wordSegment}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => {
+            if(index +1 == dictionary.length)
+              return;
+            move("next")}}>
             <AntDesign name="right" size={30} color="black" />
           </TouchableOpacity>
         </View>
@@ -68,6 +91,10 @@ const Create = (props) => {
 };
 
 const ModalView = (props) => {
+  const [en,setEn]=useState();
+  const [tr,setTr]=useState();
+  const dispatch= useDispatch();
+
   const { modal, setModal } = props.modal;
   return (
     <Modal
@@ -81,10 +108,22 @@ const ModalView = (props) => {
           <Text style={Style.cross}>x</Text>
         </TouchableOpacity>
 
-        <TextInput placeholder="English" style={Style.textBox} />
-        <TextInput placeholder="Turkish" style={Style.textBox} />
+        <TextInput value={en} placeholder="English" style={Style.textBox} 
+        onChangeText={(e) => setEn(e)}  
+        />
+        <TextInput value={tr} placeholder="Turkish" style={Style.textBox} 
+        onChangeText={(e)=> setTr(e)}/>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> {
+          const obj ={
+            en,
+            tr
+          };
+          dispatch(add(obj));
+          setEn(""),
+          setTr("");
+          setModal(false)
+        }}>
           <View style={Style.button}>
             <AntDesign name="heart" size={20} color="red" />
             <Text style={Style.buttonText}>Save</Text>

@@ -13,6 +13,6 @@ ShenWallet is a React Native app for using React Native animated and gesture han
 
 Here are some Gif of the app:
 
-
+<img width="777" src="/shengptpro/birici.gif">
 
 

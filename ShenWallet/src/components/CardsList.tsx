@@ -24,6 +24,7 @@ const CardsList = () => {
 
     const scrollY = useSharedValue(0); // basılan yeri 0 dan başlatarak kaydeder
 
+    const activeCardIndex = useSharedValue(null); //hangi karta tıkladığımızın indexini alır
 
     const pan = Gesture.Pan()
     .onBegin(()=>{ // scrolle başladığımızda bir yere dokununca durması için
@@ -50,7 +51,14 @@ const CardsList = () => {
         <GestureDetector gesture={pan}>
             <SafeAreaView style={{ padding: 10 }} onLayout={(event)=> setListHeight(event.nativeEvent.layout.height)}>
                 {cards.map((card, index) =>  // map ile kartılarımızı dönrüdük
-                    <Card key={index} index={index} card={card} scrollY={scrollY}/> // kartımıza yeni bir sayfa açtık ve prop ile değerleri aktardık
+                    <Card 
+                        key={index} 
+                        index={index} 
+                        card={card} 
+                        scrollY={scrollY}// kartımıza yeni bir sayfa açtık ve prop ile değerleri aktardık
+                        activeCardIndex={activeCardIndex}
+                        /> 
+                        
                 )}
 
             </SafeAreaView>

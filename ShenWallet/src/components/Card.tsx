@@ -38,6 +38,7 @@ const Card = ({ card, index, scrollY, activeCardIndex }) => {
                 translateY.value=withTiming(clamp(-scrollY.value, -index * cardHeight * 0.9, 0));  //seçilen yoksa normal hal
             }else if(activeCardIndex.value === index ){ // seçilen kartı ortda gösterir
                 translateY.value=withTiming(-index * cardHeight +100);
+                console.log("value"+index)
 
             }else{
                 translateY.value=withTiming(  //kartların hepsini en altta toplar

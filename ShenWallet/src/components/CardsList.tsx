@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, Image, SafeAreaView } from 'react-native'
+import { View, Text, Image, SafeAreaView } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+
 
 const cards = [
     require('../../assets/cards/Card 1.png'),
@@ -14,21 +16,36 @@ const cards = [
 ]
 
 const CardsList = () => {
-    return (
-        <SafeAreaView style={{padding:10}}> 
-            {cards.map((card,index) =>
-                <Image
-                    key={index}
-                    source={card}
-                    style={{
-                        width: '100%',
-                        aspectRatio: 7 / 4,
-                        height: undefined,
-                        marginVertical:5
-                    }} />
-            )}
 
-        </SafeAreaView>
+    const pan = Gesture.Pan().
+    onStart(()=>{
+        console.log("Staring")
+    }).onChange((event)=>{
+        console.log("panning"+event.changeY)
+    }).onEnd(()=>{
+        console.log("ended")
+    });
+    
+    
+    
+    return (
+        <GestureDetector gesture={pan}>
+            <SafeAreaView style={{ padding: 10 }}>
+                {cards.map((card, index) =>
+                    <Image
+                        key={index}
+                        source={card}
+                        style={{
+                            width: '100%',
+                            aspectRatio: 7 / 4,
+                            height: undefined,
+                            marginVertical: 5
+                        }} />
+                )}
+
+            </SafeAreaView>
+        </GestureDetector>
+
     )
 }
 

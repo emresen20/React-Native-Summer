@@ -6,7 +6,7 @@ NikeStore is a React Native clone app for learning redux toolkit:
 - Expo
 - useState
 - Redux Toolkit
-- React Navigation
+- React Navigations
 
   
 

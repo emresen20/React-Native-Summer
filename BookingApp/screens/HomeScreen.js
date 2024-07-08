@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/Header';
 import { Feather } from '@expo/vector-icons';
+import DatePicker from 'react-native-date-ranges';
 
 const HomeScreen = () => {
     const navigation = useNavigation();
@@ -66,6 +67,17 @@ const HomeScreen = () => {
                         borderWidth: 1
                     }} >
                         <Feather name="calendar" size={24} color="black" />
+                        <DatePicker
+                            style={{ width: 350, height: 45 }}
+                            customStyles={{
+                                placeholderText: { fontSize: 20 } // placeHolder style
+
+                            }} // optional 
+                            centerAlign // optional text will align center or not
+                            allowFontScaling={false} // optional
+                            placeholder={'Apr 27, 2018 → Jul 10, 2018'}
+                            mode={'range'}
+                        />
 
                     </Pressable>
 

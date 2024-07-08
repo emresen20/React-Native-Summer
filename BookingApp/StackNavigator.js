@@ -18,7 +18,7 @@ const StackNavigator = () => {
 
     function BottomTabs() {
         return (
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
+            <Tab.Navigator >
                 <Tab.Screen name='HomeScreen' component={HomeScreen}
                     options={{
                         tabBarLabel: "Home",
@@ -33,7 +33,7 @@ const StackNavigator = () => {
                         tabBarLabel: "Saved",
                         headerShadowVisible: false,
                         tabBarIcon: ({ focused }) => focused ?
-                            (<AntDesign name="heart" size={24} color="#003580" />)
+                            (<AntDesign name="heart" size={24} color="#003580"/>)
                             : (<AntDesign name="hearto" size={24} color="black" />)
                     }} />
 

@@ -136,10 +136,12 @@ const HomeScreen = () => {
                                         fontSize: 15,
                                         flexDirection: "row",
                                         alignItems: "center",
-                                        marginRight: "auto"
+                                        marginRight: "auto",
+                                        
                                     },
                                     headerStyle: {
                                         backgroundColor: "#003580",
+                                        
 
                                     },
                                     contentText:

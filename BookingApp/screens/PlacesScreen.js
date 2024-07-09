@@ -6,6 +6,7 @@ import { Octicons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { data } from '../data';
+import PropertyCard from '../components/PropertyCard';
 
 const PlacesScreen = () => {
     const route = useRoute();
@@ -92,12 +93,23 @@ const PlacesScreen = () => {
                 </Pressable>
 
             </Pressable>
-            <ScrollView 
+            <ScrollView
                 style={{
-                    backgroundColor:"#F5F5F5"
+                    backgroundColor: "#F5F5F5"
                 }}>
 
-
+                {data?.filter((item) => item.place === route.params.place).
+                    map((item) => item.properties.map((property, index) => (
+                        <PropertyCard
+                            key={index}
+                            rooms={route.params.rooms}
+                            children={route.params.children}
+                            adults={route.params.adults}
+                            selectedDates={route.params.selectedDates}
+                            property={property}
+                            aviableRooms={property.rooms}
+                        />
+                    )))}
             </ScrollView>
         </View>
     )

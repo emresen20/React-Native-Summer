@@ -1,4 +1,4 @@
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Image } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
@@ -127,7 +127,7 @@ const HomeScreen = () => {
                                 customButton={(onConfirm) => customButton(onConfirm)}
                                 onConfirm={(starDate, endDate) => setSelectedDates(starDate, endDate)}
                                 allowFontScaling={false} // optional
-                                placeholder={'Apr 27, 2018 → Jul 10, 2018'}
+                                placeholder={'Select Your Dates'}
                                 mode={'range'}
                             />
 
@@ -168,7 +168,124 @@ const HomeScreen = () => {
                         </Pressable>
                     </View>
                 </ScrollView>
+                <Text style={{
+                    marginHorizontal: 20,
+                    fontSize: 15,
+                    fontWeight: "500"
+                }}>
+                    Travel More Spend less
+                </Text>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <Pressable style={{
+                        width: 200,
+                        height: 150,
+                        marginTop: 10,
+                        backgroundColor: "#003580",
+                        borderRadius: 10,
+                        padding:20,
+                        marginHorizontal:10
+                    }}>
+                        <Text 
+                            style={{
+                                color:  "white",
+                                fontSize:15,
+                                fontWeight:"bold",
+                                marginVertical:7
+
+                        }}>
+                            Genius
+                        </Text>
+                        <Text 
+                            style={{
+                                color:"white",
+                                fontSize:15,
+                                fontWeight:"500",
+                                
+                            }}>
+                            You area at Genius level at 1 in our loyalty program
+                        </Text>
+                    </Pressable>
+
+                    <Pressable style={{
+                        width: 200,
+                        height: 150,
+                        marginTop: 10,
+                        borderColor: "#E0E0E0",
+                        borderWidth:2,
+                        borderRadius: 10,
+                        padding:20,
+                        marginHorizontal:10
+                    }}>
+                        <Text 
+                            style={{
+                                fontSize:15,
+                                fontWeight:"bold",
+                                marginVertical:7
+
+                        }}>
+                            15% Discounts
+                        </Text>
+                        <Text 
+                            style={{
+                                fontSize:15,
+                                fontWeight:"400",
+                                
+                            }}>
+                            Complete 5 stays to unlock level 2
+                        </Text>
+                    </Pressable>
+
+                    <Pressable style={{
+                        width: 200,
+                        height: 150,
+                        marginTop: 10,
+                        borderColor: "#E0E0E0",
+                        borderWidth:2,
+                        borderRadius: 10,
+                        padding:20,
+                        marginHorizontal:10
+                    }}>
+                        <Text 
+                            style={{
+                               
+                                fontSize:15,
+                                fontWeight:"bold",
+                                marginVertical:7
+
+                        }}>
+                            10 % Discounts
+                        </Text>
+                        <Text 
+                            style={{
+    
+                                fontSize:15,
+                                fontWeight:"400",
+                                
+                            }}>
+                            Enjoy Discounts at participating at properties worldwide
+                        </Text>
+                    </Pressable>
+
+                </ScrollView>
+
+                <Pressable 
+                    style={{
+                        marginTop:40,
+                        justifyContent:"center",
+                        alignItems:"center"
+                    }}>
+                    <Image 
+                        style={{
+                            width:200,
+                            height:50,
+                            resizeMode:"cover"
+                        }}
+                        source={{
+                            uri:"https://assets.stickpng.com/thumbs/5a32a821cb9a85480a628f8f.png"
+                        }}/>
+                </Pressable>
             </View>
+
             <BottomModal
                 swipeThreshold={200}
                 onHardwareBackPress={() => setModalVisiable(!modalVisiable)}
@@ -248,8 +365,8 @@ const HomeScreen = () => {
                             Adults
                         </Text>
                         <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                            <Pressable 
-                                onPress={()=> setAdults(Math.max(1,adults-1))}
+                            <Pressable
+                                onPress={() => setAdults(Math.max(1, adults - 1))}
                                 style={{ marginRight: 4 }}>
                                 <Text
                                     style={{
@@ -266,8 +383,8 @@ const HomeScreen = () => {
                                 }}>{adults}</Text>
                             </Pressable>
 
-                            <Pressable 
-                                onPress={()=> setAdults((e)=> e+1)}
+                            <Pressable
+                                onPress={() => setAdults((e) => e + 1)}
                                 style={{ marginLeft: 4 }}>
                                 <Text style={{
                                     fontSize: 20,
@@ -287,8 +404,8 @@ const HomeScreen = () => {
                             Children
                         </Text>
                         <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                            <Pressable 
-                                onPress={()=> setChildren(Math.max(0,children-1))}
+                            <Pressable
+                                onPress={() => setChildren(Math.max(0, children - 1))}
                                 style={{ marginRight: 4 }}>
                                 <Text
                                     style={{
@@ -305,8 +422,8 @@ const HomeScreen = () => {
                                 }}>{children}</Text>
                             </Pressable>
 
-                            <Pressable 
-                                onPress={()=> setChildren((e)=> e+1)}
+                            <Pressable
+                                onPress={() => setChildren((e) => e + 1)}
                                 style={{ marginLeft: 4 }}>
                                 <Text style={{
                                     fontSize: 20,

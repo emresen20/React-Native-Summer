@@ -1,7 +1,7 @@
 import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Image } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/Header';
 import { Feather } from '@expo/vector-icons';
@@ -16,6 +16,8 @@ const HomeScreen = () => {
     const [adults, setAdults] = useState(2);
     const [children, setChildren] = useState(0);
     const [modalVisiable, setModalVisiable] = useState(false)
+
+    const route= useRoute();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -55,6 +57,7 @@ const HomeScreen = () => {
             // />
         )
     }
+    
     return (
         <>
 
@@ -81,7 +84,8 @@ const HomeScreen = () => {
                             borderWidth: 1
                         }}>
                             <Feather name="search" size={24} color="black" />
-                            <TextInput placeholder='Enter Your Destination' placeholderTextColor={"black"} />
+                            <TextInput placeholder={route?.params ? route.params.input : "Enter Your Destination"} 
+                                placeholderTextColor={"black"} />
                         </Pressable>
 
                         {/* Selected Dates */}

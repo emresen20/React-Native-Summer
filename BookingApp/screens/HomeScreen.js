@@ -147,7 +147,7 @@ const HomeScreen = () => {
                                 borderWidth: 1
                             }}>
                             <Ionicons name="person-outline" size={24} color="black" />
-                            <TextInput placeholder='1 room 2 adults 0 children' placeholderTextColor={"red"} />
+                            <TextInput placeholder={`${rooms} Rooms  ${adults} Adults  ${children} Children`} placeholderTextColor={"red"} />
 
                         </Pressable>
 
@@ -248,7 +248,9 @@ const HomeScreen = () => {
                             Adults
                         </Text>
                         <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                            <Pressable style={{ marginRight: 4 }}>
+                            <Pressable 
+                                onPress={()=> setAdults(Math.max(1,adults-1))}
+                                style={{ marginRight: 4 }}>
                                 <Text
                                     style={{
                                         fontSize: 20,
@@ -264,7 +266,9 @@ const HomeScreen = () => {
                                 }}>{adults}</Text>
                             </Pressable>
 
-                            <Pressable style={{ marginLeft: 4 }}>
+                            <Pressable 
+                                onPress={()=> setAdults((e)=> e+1)}
+                                style={{ marginLeft: 4 }}>
                                 <Text style={{
                                     fontSize: 20,
                                 }}>+</Text>
@@ -283,7 +287,9 @@ const HomeScreen = () => {
                             Children
                         </Text>
                         <Pressable style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                            <Pressable style={{ marginRight: 4 }}>
+                            <Pressable 
+                                onPress={()=> setChildren(Math.max(0,children-1))}
+                                style={{ marginRight: 4 }}>
                                 <Text
                                     style={{
                                         fontSize: 20,
@@ -299,7 +305,9 @@ const HomeScreen = () => {
                                 }}>{children}</Text>
                             </Pressable>
 
-                            <Pressable style={{ marginLeft: 4 }}>
+                            <Pressable 
+                                onPress={()=> setChildren((e)=> e+1)}
+                                style={{ marginLeft: 4 }}>
                                 <Text style={{
                                     fontSize: 20,
                                 }}>+</Text>

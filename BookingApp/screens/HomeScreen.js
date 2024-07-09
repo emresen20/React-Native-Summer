@@ -69,7 +69,9 @@ const HomeScreen = () => {
                             borderRadius: 6
                         }}>
                         {/* Destination */}
-                        <Pressable style={{
+                        <Pressable 
+                            onPress={()=> navigation.navigate("SearchScreen")}
+                            style={{
                             flexDirection: "row",
                             alignItems: "center",
                             gap: 10,

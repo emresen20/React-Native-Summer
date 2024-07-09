@@ -11,6 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import BookingScreen from './screens/BookingScreen';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileScreen from './screens/ProfileScreen';
+import SearchScreen from './screens/SearchScreen';
 
 const StackNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -61,6 +62,7 @@ const StackNavigator = () => {
         <NavigationContainer >
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="BottomTabs" component={BottomTabs}  options={{ headerShadowVisible: false }} />
+                <Stack.Screen name='SearchScreen' component={SearchScreen} options={{ headerShadowVisible: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )

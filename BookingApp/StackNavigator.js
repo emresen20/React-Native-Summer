@@ -12,6 +12,7 @@ import BookingScreen from './screens/BookingScreen';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileScreen from './screens/ProfileScreen';
 import SearchScreen from './screens/SearchScreen';
+import PlacesScreen from './screens/PlacesScreen';
 
 const StackNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -60,9 +61,10 @@ const StackNavigator = () => {
     }
     return (
         <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="BottomTabs" component={BottomTabs}  options={{ headerShadowVisible: false }} />
-                <Stack.Screen name='SearchScreen' component={SearchScreen} options={{ headerShadowVisible: false }} />
+            <Stack.Navigator >
+                <Stack.Screen name="BottomTabs" component={BottomTabs}  options={{headerShown:false}} />
+                <Stack.Screen name='SearchScreen' component={SearchScreen} options={{headerShown:false}} />
+                <Stack.Screen name='PlacesScreen' component={PlacesScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

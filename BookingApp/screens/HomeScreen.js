@@ -1,4 +1,4 @@
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Image } from 'react-native'
+import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Image,Alert } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -56,6 +56,30 @@ const HomeScreen = () => {
 
             // />
         )
+    }
+    const serachPlaces=(place)=>{
+        if(!route.params || !selectedDates){
+            Alert.alert(
+                'Invalid Details', 
+                'Please enter all the details', [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ]);
+          
+        }
+        if(route.params && selectedDates){
+            navigation.navigate("PlacesScreen",{
+                rooms:rooms,
+                adults:adults,
+                children:children,
+                selectedDates:selectedDates,
+                place:place
+            })
+        }  
     }
     
     return (
@@ -158,7 +182,9 @@ const HomeScreen = () => {
                         </Pressable>
 
                         {/* Search Button */}
-                        <Pressable style={{
+                        <Pressable 
+                            onPress={()=> serachPlaces(route?.params.input)}
+                            style={{
                             paddingHorizontal: 10,
                             borderColor: "orange",
                             paddingVertical: 13,

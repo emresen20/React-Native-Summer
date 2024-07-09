@@ -328,9 +328,12 @@ const HomeScreen = () => {
                     <ModalFooter>
                         <ModalButton text='Apply'
                             onHardwareBackPress={() => setModalVisiable(!modalVisiable)}
+                            textStyle={{
+                                color:"white"
+                            }}
                             style={{
                                 marginBottom: 3,
-                                color: "white",
+                                textColor:"white",
                                 backgroundColor: "#003580"
                             }}
                             onPress={() => setModalVisiable(!modalVisiable)}

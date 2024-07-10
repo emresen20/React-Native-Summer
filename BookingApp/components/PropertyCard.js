@@ -2,12 +2,27 @@ import { Pressable, StyleSheet, Text, View, Image, Dimensions } from 'react-nati
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const PropertyCard = ({ rooms, children, property, adults, selectedDates, aviableRooms }) => {
   const { width, height } = Dimensions.get("window") //ekranı kendi genişlik ve yüksekliği
+  const navigation = useNavigation()
   return (
     <View>
       <Pressable  // right view
+        onPress={()=> navigation.navigate("PropertyInfoScreen",{
+          name:property.name,
+          rating:property.rating,
+          oldPrice:property.oldPrice,
+          newPrice:property.newPrice,
+          photos:property.photos,
+          rooms:property.rooms,
+          adults:adults,
+          children:children,
+          rooms:rooms,
+          selectedDates:selectedDates
+
+        })}
         style={{ margin: 15, flexDirection: "row", backgroundColor: "white", }}>
         <View>
           <Image

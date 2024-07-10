@@ -137,7 +137,7 @@ const PlacesScreen = () => {
 
                 <Pressable
                     onPress={()=> navigation.navigate("MapScreen",{
-                        serhResults:serachPlaces,
+                        searchResults:serachPlaces,
                     })
                         
                     }

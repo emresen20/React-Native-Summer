@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ProfileScreen from './screens/ProfileScreen';
 import SearchScreen from './screens/SearchScreen';
 import PlacesScreen from './screens/PlacesScreen';
+import MapScreen from './screens/MapScreen';
 
 const StackNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -65,6 +66,7 @@ const StackNavigator = () => {
                 <Stack.Screen name="BottomTabs" component={BottomTabs}  options={{headerShown:false}} />
                 <Stack.Screen name='SearchScreen' component={SearchScreen} options={{headerShown:false}} />
                 <Stack.Screen name='PlacesScreen' component={PlacesScreen} />
+                <Stack.Screen name='MapScreen' component={MapScreen} options={{headerShown:false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

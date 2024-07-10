@@ -8,8 +8,10 @@ import { Fontisto } from '@expo/vector-icons';
 import { data } from '../data';
 import { FontAwesome } from '@expo/vector-icons';
 
+
 import PropertyCard from '../components/PropertyCard';
 import { BottomModal, ModalFooter, SlideAnimation, ModalTitle, ModalContent } from 'react-native-modals';
+import MapScreen from './MapScreen';
 
 
 
@@ -134,6 +136,11 @@ const PlacesScreen = () => {
                 </Pressable>
 
                 <Pressable
+                    onPress={()=> navigation.navigate("MapScreen",{
+                        serhResults:serachPlaces,
+                    })
+                        
+                    }
                     style={{
                         flexDirection: "row",
                         alignItems: "center"

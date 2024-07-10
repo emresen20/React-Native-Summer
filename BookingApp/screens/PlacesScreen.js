@@ -159,7 +159,8 @@ const PlacesScreen = () => {
             </Pressable>
             <ScrollView
                 style={{
-                    backgroundColor: "#F5F5F5"
+                    backgroundColor: "#F5F5F5",
+                    marginBottom:50
                 }}>
 
                 {sortedData?.filter((item) => item.place === route.params.place).

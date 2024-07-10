@@ -7,10 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { data } from '../data';
 import PropertyCard from '../components/PropertyCard';
+import { BottomModal, ModalFooter,SlideAnimation,ModalTitle, ModalContent } from 'react-native-modals';
 
 const PlacesScreen = () => {
     const route = useRoute();
     const navigation = useNavigation();
+    const [modalVisiable, setModalVisiable] = useState(false)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -44,6 +46,7 @@ const PlacesScreen = () => {
                     backgroundColor: "white"
                 }}>
                 <Pressable
+                    onPress={()=> setModalVisiable(!modalVisiable)}
                     style={{
                         flexDirection: "row",
                         alignItems: "center"
@@ -111,6 +114,49 @@ const PlacesScreen = () => {
                         />
                     )))}
             </ScrollView>
+            <BottomModal
+                onHardwareBackPress={() => setModalVisiable(!modalVisiable)}
+                swipeDirection={["up", "down"]}
+                swipeThreshold={200} footer={<ModalFooter>
+                    <Pressable
+                        style={{
+                            paddingRight: 10,
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginVertical: 10
+                        }}>
+                        <Text>Apply</Text>
+                    </Pressable>
+                </ModalFooter>}
+                modalTitle={<ModalTitle title='Sort and Filter' />}
+                modalAnimation={new SlideAnimation({
+                    slideFrom: "bottom",
+                })
+                }
+                visible={modalVisiable}
+                onTouchOutside={() => setModalVisiable(!modalVisiable)}
+            >
+                <ModalContent style={{width:"100%",height:280}}>
+                    <View style={{flexDirection:"row"}}>
+                        <View 
+                            style={{
+                                marginVertical:10,
+                                flex:2,
+                                height:280,
+                                borderRightWidth:1,
+                                borderColor:"gray"
+                                }}> 
+                            <Text style={{textAlign:"center"}}>Sort</Text>
+                        </View>
+                        <View   
+                            style={{flex:3}}>
+
+                        </View>
+                    </View>
+
+                </ModalContent>
+
+            </BottomModal>
         </View>
     )
 }

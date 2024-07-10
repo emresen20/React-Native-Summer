@@ -1,4 +1,4 @@
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,Image,Alert } from 'react-native'
+import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Alert } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -17,7 +17,7 @@ const HomeScreen = () => {
     const [children, setChildren] = useState(0);
     const [modalVisiable, setModalVisiable] = useState(false)
 
-    const route= useRoute();
+    const route = useRoute();
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -57,31 +57,31 @@ const HomeScreen = () => {
             // />
         )
     }
-    const serachPlaces=(place)=>{
-        if(!route.params || !selectedDates){
+    const serachPlaces = (place) => {
+        if (!route.params || !selectedDates) {
             Alert.alert(
-                'Invalid Details', 
+                'Invalid Details',
                 'Please enter all the details', [
                 {
-                  text: 'Cancel',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel',
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
                 },
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-              ]);
-          
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+
         }
-        if(route.params && selectedDates){
-            navigation.navigate("PlacesScreen",{
-                rooms:rooms,
-                adults:adults,
-                children:children,
-                selectedDates:selectedDates,
-                place:place
+        if (route.params && selectedDates) {
+            navigation.navigate("PlacesScreen", {
+                rooms: rooms,
+                adults: adults,
+                children: children,
+                selectedDates: selectedDates,
+                place: place
             })
-        }  
+        }
     }
-    
+
     return (
         <>
 
@@ -96,19 +96,19 @@ const HomeScreen = () => {
                             borderRadius: 6
                         }}>
                         {/* Destination */}
-                        <Pressable 
-                            onPress={()=> navigation.navigate("SearchScreen")}
+                        <Pressable
+                            onPress={() => navigation.navigate("SearchScreen")}
                             style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            gap: 10,
-                            paddingHorizontal: 10,
-                            borderColor: "orange",
-                            paddingVertical: 13,
-                            borderWidth: 1
-                        }}>
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: 10,
+                                paddingHorizontal: 10,
+                                borderColor: "orange",
+                                paddingVertical: 13,
+                                borderWidth: 1
+                            }}>
                             <Feather name="search" size={24} color="black" />
-                            <TextInput placeholder={route?.params ? route.params.input : "Enter Your Destination"} 
+                            <TextInput placeholder={route?.params ? route.params.input : "Enter Your Destination"}
                                 placeholderTextColor={"black"} />
                         </Pressable>
 
@@ -129,40 +129,37 @@ const HomeScreen = () => {
                                     height: 30,
                                     borderRadius: 0,
                                     borderWidth: 0,
-                                    borderColor: "transparent"
+                                    borderColor: "transparent",
                                 }}
                                 customStyles={{
+                                    
                                     placeholderText: {
                                         fontSize: 15,
                                         flexDirection: "row",
                                         alignItems: "center",
                                         marginRight: "auto",
-                                        
                                     },
                                     headerStyle: {
                                         backgroundColor: "#003580",
                                         
-
+                                        
                                     },
-                                    contentText:
-                                    {
+                                    contentText: {
                                         fontSize: 15,
                                         flexDirection: "row",
                                         alignItems: "center",
-                                        marginRight: "auto"
+                                        marginRight: "auto",
                                     },
-
-
                                 }}
-
-                                selectedBgColor="orange"
+                                selectedBgColor="#0047AB"
                                 customButton={(onConfirm) => customButton(onConfirm)}
-                                onConfirm={(starDate, endDate) => setSelectedDates(starDate, endDate)}
-                                allowFontScaling={false} // optional
-                                placeholder={'Select Your Dates'}
-                                mode={'range'}
+                                onConfirm={(startDate, endDate) =>
+                                    setSelectedDates(startDate, endDate)
+                                }
+                                allowFontScaling={false}
+                                placeholder={"Select Your Dates"}
+                                mode={"range"}
                             />
-
                         </Pressable >
 
                         {/* Rooms and Guest */}
@@ -184,15 +181,15 @@ const HomeScreen = () => {
                         </Pressable>
 
                         {/* Search Button */}
-                        <Pressable 
-                            onPress={()=> serachPlaces(route?.params.input)}
+                        <Pressable
+                            onPress={() => serachPlaces(route?.params.input)}
                             style={{
-                            paddingHorizontal: 10,
-                            borderColor: "orange",
-                            paddingVertical: 13,
-                            borderWidth: 1,
-                            backgroundColor: "#003580"
-                        }}>
+                                paddingHorizontal: 10,
+                                borderColor: "orange",
+                                paddingVertical: 13,
+                                borderWidth: 1,
+                                backgroundColor: "#003580"
+                            }}>
                             <Text style={{
                                 textAlign: "center",
                                 fontSize: 15,
@@ -216,25 +213,25 @@ const HomeScreen = () => {
                         marginTop: 10,
                         backgroundColor: "#003580",
                         borderRadius: 10,
-                        padding:20,
-                        marginHorizontal:10
+                        padding: 20,
+                        marginHorizontal: 10
                     }}>
-                        <Text 
+                        <Text
                             style={{
-                                color:  "white",
-                                fontSize:15,
-                                fontWeight:"bold",
-                                marginVertical:7
+                                color: "white",
+                                fontSize: 15,
+                                fontWeight: "bold",
+                                marginVertical: 7
 
-                        }}>
+                            }}>
                             Genius
                         </Text>
-                        <Text 
+                        <Text
                             style={{
-                                color:"white",
-                                fontSize:15,
-                                fontWeight:"500",
-                                
+                                color: "white",
+                                fontSize: 15,
+                                fontWeight: "500",
+
                             }}>
                             You area at Genius level at 1 in our loyalty program
                         </Text>
@@ -245,25 +242,25 @@ const HomeScreen = () => {
                         height: 150,
                         marginTop: 10,
                         borderColor: "#E0E0E0",
-                        borderWidth:2,
+                        borderWidth: 2,
                         borderRadius: 10,
-                        padding:20,
-                        marginHorizontal:10
+                        padding: 20,
+                        marginHorizontal: 10
                     }}>
-                        <Text 
+                        <Text
                             style={{
-                                fontSize:15,
-                                fontWeight:"bold",
-                                marginVertical:7
+                                fontSize: 15,
+                                fontWeight: "bold",
+                                marginVertical: 7
 
-                        }}>
+                            }}>
                             15% Discounts
                         </Text>
-                        <Text 
+                        <Text
                             style={{
-                                fontSize:15,
-                                fontWeight:"400",
-                                
+                                fontSize: 15,
+                                fontWeight: "400",
+
                             }}>
                             Complete 5 stays to unlock level 2
                         </Text>
@@ -274,27 +271,27 @@ const HomeScreen = () => {
                         height: 150,
                         marginTop: 10,
                         borderColor: "#E0E0E0",
-                        borderWidth:2,
+                        borderWidth: 2,
                         borderRadius: 10,
-                        padding:20,
-                        marginHorizontal:10
+                        padding: 20,
+                        marginHorizontal: 10
                     }}>
-                        <Text 
+                        <Text
                             style={{
-                               
-                                fontSize:15,
-                                fontWeight:"bold",
-                                marginVertical:7
 
-                        }}>
+                                fontSize: 15,
+                                fontWeight: "bold",
+                                marginVertical: 7
+
+                            }}>
                             10 % Discounts
                         </Text>
-                        <Text 
+                        <Text
                             style={{
-    
-                                fontSize:15,
-                                fontWeight:"400",
-                                
+
+                                fontSize: 15,
+                                fontWeight: "400",
+
                             }}>
                             Enjoy Discounts at participating at properties worldwide
                         </Text>
@@ -302,21 +299,21 @@ const HomeScreen = () => {
 
                 </ScrollView>
 
-                <Pressable 
+                <Pressable
                     style={{
-                        marginTop:40,
-                        justifyContent:"center",
-                        alignItems:"center"
+                        marginTop: 40,
+                        justifyContent: "center",
+                        alignItems: "center"
                     }}>
-                    <Image 
+                    <Image
                         style={{
-                            width:200,
-                            height:50,
-                            resizeMode:"cover"
+                            width: 200,
+                            height: 50,
+                            resizeMode: "cover"
                         }}
                         source={{
-                            uri:"https://assets.stickpng.com/thumbs/5a32a821cb9a85480a628f8f.png"
-                        }}/>
+                            uri: "https://assets.stickpng.com/thumbs/5a32a821cb9a85480a628f8f.png"
+                        }} />
                 </Pressable>
             </View>
 
@@ -329,11 +326,11 @@ const HomeScreen = () => {
                         <ModalButton text='Apply'
                             onHardwareBackPress={() => setModalVisiable(!modalVisiable)}
                             textStyle={{
-                                color:"white"
+                                color: "white"
                             }}
                             style={{
                                 marginBottom: 3,
-                                textColor:"white",
+                                textColor: "white",
                                 backgroundColor: "#003580"
                             }}
                             onPress={() => setModalVisiable(!modalVisiable)}

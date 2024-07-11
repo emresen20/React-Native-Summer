@@ -36,7 +36,7 @@ const PropertyInfoScreen = () => {
 
     return (
         <View >
-            <ScrollView >
+            <ScrollView style={{marginBottom:10}}>
                 <Pressable style={{ flexDirection: "row", margin: 8, flexWrap: "wrap" }}>
                     {route.params.photos.slice(0, 5).map((photo) => (
                         <View style={{ margin: 5 }}>
@@ -202,10 +202,21 @@ const PropertyInfoScreen = () => {
                 <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} />
                 <Amenities/>
                 <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} /> 
-            </ScrollView>
-            <Pressable>
-                <Text>Select Availabilty</Text>
+                <Pressable 
+                style={{
+                    backgroundColor:"#6CB4EE",
+                    paddingVertical:15,
+                    padding:15,
+                    width:"95%",
+                    marginHorizontal:10,
+                    borderRadius:5
+
+          
+                }}>
+                <Text style={{textAlign:"center",fontSize:16,color:"white",fontWeight:"600"}}>Select Availabilty</Text>
             </Pressable>
+            </ScrollView>
+           
         </View>
     )
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Pressable, ScrollView } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { MaterialIcons } from "@expo/vector-icons";
 import { useSelector } from 'react-redux'
@@ -26,7 +26,7 @@ const BookingScreen = () => {
     });
   }, []);
   return (
-    <SafeAreaView>
+    <ScrollView>
       {bookings.length > 0 && bookings.map((item) => (
         <Pressable
           style={{
@@ -81,7 +81,7 @@ const BookingScreen = () => {
           </View>
         </Pressable>
       ))}
-    </SafeAreaView>
+    </ScrollView>
   )
 }
 

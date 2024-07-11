@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View,Alert } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { MaterialIcons } from '@expo/vector-icons';
@@ -12,6 +12,14 @@ const ConfirmationScreen = () => {
 
     const confirmBooking=()=>{
         dispatch(savedPlaces(route.params));
+        Alert.alert('Booked', 'Thanks for booked', [
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]);
         navigation.navigate("HomeScreen")
     }
 

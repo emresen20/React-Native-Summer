@@ -31,33 +31,91 @@ const UserScreen = () => {
     const [phoneNo, setPhoneNo] = useState("");
     const [email, setEmail] = useState("");
 
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    const validatePhoneNumber = (phoneNo) => {
+        const re = /^[0-9]{10,15}$/;
+        return re.test(String(phoneNo));
+    }
+    
     const finalStep = () => {
         if (!firstName || !lastName || !email || !phoneNo) {
             Alert.alert('Invalide Details', 'Please enter all the fields', [
                 {
                     text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
+                    onPress: () => console.log('İptal Edildi'),
                     style: 'cancel',
                 },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
+                { text: 'Ok', onPress: () => console.log('Ok') },
             ]);
-        }
-        if (firstName && lastName && email && phoneNo) {
-            navigation.navigate("ConfirmationScreen", {
-                oldPrice: route.params.oldPrice,
-                newPrice: route.params.newPrice,
-                name: route.params.name,
-                children: route.params.children,
-                adults: route.params.adults,
-                rating: route.params.rating,
-                startDate: route.params.startDate,
-                endDate: route.params.endDate
-            }
-            )
-
+            return;
         }
 
+        if (!validatePhoneNumber(phoneNo)) {
+            Alert.alert('Invalide Phone Numner', 'Please enter a valid Phone Number', [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('İptal Edildi'),
+                    style: 'cancel',
+                },
+                { text: 'Ok', onPress: () => console.log('Tamam') },
+            ]);
+            return;
+        }
+    
+        if (!validateEmail(email)) {
+            Alert.alert('Invalide Email', 'Please enter a valid email address', [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('İptal Edildi'),
+                    style: 'cancel',
+                },
+                { text: 'Tamam', onPress: () => console.log('Ok') },
+            ]);
+            return;
+        }
+    
+        navigation.navigate("ConfirmationScreen", {
+            oldPrice: route.params.oldPrice,
+            newPrice: route.params.newPrice,
+            name: route.params.name,
+            children: route.params.children,
+            adults: route.params.adults,
+            rating: route.params.rating,
+            startDate: route.params.startDate,
+            endDate: route.params.endDate
+        });
     }
+    // const finalStep = () => {
+    //     if (!firstName || !lastName || !email || !phoneNo) {
+    //         Alert.alert('Invalide Details', 'Please enter all the fields', [
+    //             {
+    //                 text: 'Cancel',
+    //                 onPress: () => console.log('Cancel Pressed'),
+    //                 style: 'cancel',
+    //             },
+    //             { text: 'OK', onPress: () => console.log('OK Pressed') },
+    //         ]);
+    //     }
+    //     if (firstName && lastName && email && phoneNo) {
+    //         navigation.navigate("ConfirmationScreen", {
+    //             oldPrice: route.params.oldPrice,
+    //             newPrice: route.params.newPrice,
+    //             name: route.params.name,
+    //             children: route.params.children,
+    //             adults: route.params.adults,
+    //             rating: route.params.rating,
+    //             startDate: route.params.startDate,
+    //             endDate: route.params.endDate
+    //         }
+    //         )
+
+    //     }
+
+    // }
     return (
         <>
 

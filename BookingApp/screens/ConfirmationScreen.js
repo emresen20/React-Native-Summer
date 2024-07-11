@@ -2,10 +2,18 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { MaterialIcons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { savedPlaces } from '../SavedReducer';
 
 const ConfirmationScreen = () => {
     const route = useRoute();
     const navigation = useNavigation();
+    const dispatch=useDispatch();
+
+    const confirmBooking=()=>{
+        dispatch(savedPlaces(route.params));
+        navigation.navigate("HomeScreen")
+    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -135,6 +143,7 @@ const ConfirmationScreen = () => {
                 </View>
 
                 <Pressable 
+                    onPress={confirmBooking}
                     style={{
                         backgroundColor:"#003580",
                         width:120,

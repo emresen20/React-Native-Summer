@@ -17,6 +17,7 @@ import MapScreen from './screens/MapScreen';
 import PropertyInfoScreen from './screens/PropertyInfoScreen';
 import RoomsScreen from './screens/RoomsScreen';
 import UserScreen from './screens/UserScreen';
+import ConfirmationScreen from './screens/ConfirmationScreen';
 
 const StackNavigator = () => {
     const Tab = createBottomTabNavigator();
@@ -73,6 +74,7 @@ const StackNavigator = () => {
                 <Stack.Screen name='PropertyInfoScreen' component={PropertyInfoScreen} />
                 <Stack.Screen name='RoomsScreen' component={RoomsScreen}/>
                 <Stack.Screen name='UserScreen' component={UserScreen}/>
+                <Stack.Screen name="ConfirmationScreen" component={ConfirmationScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

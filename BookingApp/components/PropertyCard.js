@@ -16,7 +16,7 @@ const PropertyCard = ({ rooms, children, property, adults, selectedDates, aviabl
           oldPrice:property.oldPrice,
           newPrice:property.newPrice,
           photos:property.photos,
-          rooms:property.rooms,
+          availableRooms:property.rooms,
           adults:adults,
           children:children,
           rooms:rooms,

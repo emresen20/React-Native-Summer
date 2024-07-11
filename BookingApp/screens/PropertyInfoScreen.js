@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { pixelNormalize } from '../components/Normalize'
 import { MaterialIcons } from '@expo/vector-icons';
+import Amenities from '../components/Amenities'
 
 const PropertyInfoScreen = () => {
     const route = useRoute()
@@ -144,16 +145,67 @@ const PropertyInfoScreen = () => {
                     </Text>
                 </View>
                 <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} />
-                <View>
+                <View
+                    style={{
+                        margin: 10,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: 60
+                    }}>
                     <View>
-                        <Text>Check In</Text>
+                        <Text
+                            style={{
+                                fontSize: 15,
+                                fontWeight: "600",
+                                marginBottom: 2
+                            }}>
+                            Check In
+                        </Text>
+                        <Text style={{
+                            fontSize: 14,
+                            fontWeight: "bold",
+                            color: "#007FFF"
+                        }}>{route.params.selectedDates.startDate}</Text>
                     </View>
-                    <View>
 
+                    <View>
+                        <Text style={{
+                            fontSize: 15,
+                            fontWeight: "600",
+                            marginBottom: 2
+                        }}>Check Out</Text>
+                        <Text
+                            style={{
+                                fontSize: 14,
+                                fontWeight: "bold",
+                                color: "#007FFF"
+                            }}>{route.params.selectedDates.endDate}</Text>
                     </View>
                 </View>
-            </ScrollView>
+                <View style={{
+                    margin: 10,
 
+                }}>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "600",
+                        marginBottom: 2
+                    }}>Rooms and Guest</Text>
+                    <Text style={{
+                        fontSize: 14,
+                        fontWeight: "bold",
+                        color: "#007FFF"
+                    }}>
+                        {route.params.rooms} rooms {route.params.adults} adults {route.params.children} children
+                    </Text>
+                </View>
+                <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} />
+                <Amenities/>
+                <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} /> 
+            </ScrollView>
+            <Pressable>
+                <Text>Select Availabilty</Text>
+            </Pressable>
         </View>
     )
 }

@@ -125,23 +125,33 @@ const RoomsScreen = () => {
                     </Pressable>
                 ))}
             </ScrollView>
-            {selected.length >0 ?(
-                <Pressable 
+            {selected.length > 0 ? (
+                <Pressable
+                    onPress={() => navigation.navigate("UserScreen", {
+                        oldPrice: route.params.oldPrice,
+                        newPrice: route.params.newPrice,
+                        name: route.params.name,
+                        children: route.params.children,
+                        adults: route.params.adults,
+                        rating: route.params.rating,
+                        startDate: route.params.startDate,
+                        endDate: route.params.endDate
+                    })}
                     style={{
-                        backgroundColor:"#007FFF",
-                        padding:8,
-                        marginBottom:30,
-                        borderRadius:6,
-                        marginHorizontal:10
+                        backgroundColor: "#007FFF",
+                        padding: 8,
+                        marginBottom: 30,
+                        borderRadius: 6,
+                        marginHorizontal: 10
                     }}>
-                    <Text 
+                    <Text
                         style={{
-                            textAlign:"center",
-                            color:"white",
-                            fontWeight:"bold"
+                            textAlign: "center",
+                            color: "white",
+                            fontWeight: "bold"
                         }}>Reserve</Text>
                 </Pressable>
-            ):null
+            ) : null
             }
         </>
 

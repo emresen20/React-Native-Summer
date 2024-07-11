@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, View, Alert } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 
@@ -30,6 +30,34 @@ const UserScreen = () => {
     const [lastName, setLastName] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
     const [email, setEmail] = useState("");
+
+    const finalStep = () => {
+        if (!firstName || !lastName || !email || !phoneNo) {
+            Alert.alert('Invalide Details', 'Please enter all the fields', [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
+        }
+        if (firstName && lastName && email && phoneNo) {
+            navigation.navigate("ConfirmationScreen", {
+                oldPrice: route.params.oldPrice,
+                newPrice: route.params.newPrice,
+                name: route.params.name,
+                children: route.params.children,
+                adults: route.params.adults,
+                rating: route.params.rating,
+                startDate: route.params.startDate,
+                endDate: route.params.endDate
+            }
+            )
+
+        }
+
+    }
     return (
         <>
 
@@ -53,7 +81,7 @@ const UserScreen = () => {
                         marginTop: 10
                     }}>
                     <Text>Last Name</Text>
-                    <TextInput value={email} onChangeText={(text) => setLastName(text)} style={{ padding: 6, borderColor: "gray", borderWidth: 1 }} />
+                    <TextInput value={lastName} onChangeText={(text) => setLastName(text)} style={{ padding: 6, borderColor: "gray", borderWidth: 1 }} />
                 </View>
                 <View
                     style={{
@@ -83,10 +111,10 @@ const UserScreen = () => {
                     alignItems: "center",
                     marginTop: "auto",
                     flexDirection: "row",
-                    marginBottom:40,
-                    padding:10,
-                    justifyContent:"space-between"
-                    
+                    marginBottom: 40,
+                    padding: 10,
+                    justifyContent: "space-between"
+
                 }}>
                 <View>
                     <View
@@ -103,17 +131,11 @@ const UserScreen = () => {
                         You Saved {route.params.oldPrice - route.params.newPrice} tl
                     </Text>
                 </View>
-                <Pressable onPress={()=> navigation.navigate("ConfirmationScreen",{
-                      oldPrice: route.params.oldPrice,
-                      newPrice: route.params.newPrice,
-                      name: route.params.name,
-                      children: route.params.children,
-                      adults: route.params.adults,
-                      rating: route.params.rating,
-                      startDate: route.params.startDate,
-                      endDate: route.params.endDate
-                })} style={{backgroundColor:"#007FFF",padding:9,borderRadius:5}}>
-                    <Text style={{textAlign:"center",color:"white"}}>Final Step</Text>
+                <Pressable
+
+
+                    onPress={() => finalStep()} style={{ backgroundColor: "#007FFF", padding: 9, borderRadius: 5 }}>
+                    <Text style={{ textAlign: "center", color: "white" }}>Final Step</Text>
                 </Pressable>
             </Pressable>
         </>

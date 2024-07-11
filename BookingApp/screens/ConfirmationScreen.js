@@ -29,7 +29,7 @@ const ConfirmationScreen = () => {
 
     return (
         <View>
-            <Pressable style={{backgroundColor:"white"}}>
+            <Pressable style={{ backgroundColor: "white", margin: 10 }}>
                 <View
                     style={{
                         marginHorizontal: 10,
@@ -79,6 +79,80 @@ const ConfirmationScreen = () => {
                         </Text>
                     </View>
                 </View>
+                <View
+                    style={{
+                        margin: 10,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: 60
+                    }}>
+                    <View>
+                        <Text
+                            style={{
+                                fontSize: 15,
+                                fontWeight: "600",
+                                marginBottom: 2
+                            }}>
+                            Check In
+                        </Text>
+                        <Text style={{
+                            fontSize: 14,
+                            fontWeight: "bold",
+                            color: "#007FFF"
+                        }}>{route.params.startDate}</Text>
+                    </View>
+
+                    <View>
+                        <Text style={{
+                            fontSize: 15,
+                            fontWeight: "600",
+                            marginBottom: 2
+                        }}>Check Out</Text>
+                        <Text
+                            style={{
+                                fontSize: 14,
+                                fontWeight: "bold",
+                                color: "#007FFF"
+                            }}>{route.params.endDate}</Text>
+                    </View>
+                </View>
+                <View style={{
+                    margin: 10,
+
+                }}>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "600",
+                        marginBottom: 2
+                    }}>Rooms and Guest</Text>
+                    <Text style={{
+                        fontSize: 14,
+                        fontWeight: "bold",
+                        color: "#007FFF"
+                    }}>
+                        {route.params.rooms} rooms {route.params.adults} adults {route.params.children} children
+                    </Text>
+                </View>
+
+                <Pressable 
+                    style={{
+                        backgroundColor:"#003580",
+                        width:120,
+                        padding:5,
+                        marginHorizontal:12,
+                        marginBottom:20,
+                        borderRadius:4
+                    }}>
+                    <Text 
+                    style={{
+                        alignSelf:"center",
+                        color:"white",
+                        fontWeight:"500",
+                        fontSize:14
+                    }}>
+                        Book Now
+                        </Text>
+                </Pressable>
             </Pressable>
         </View>
     )

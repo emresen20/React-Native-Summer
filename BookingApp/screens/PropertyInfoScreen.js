@@ -36,7 +36,7 @@ const PropertyInfoScreen = () => {
 
     return (
         <View >
-            <ScrollView style={{marginBottom:10}}>
+            <ScrollView style={{ marginBottom: 10 }}>
                 <Pressable style={{ flexDirection: "row", margin: 8, flexWrap: "wrap" }}>
                     {route.params.photos.slice(0, 5).map((photo) => (
                         <View style={{ margin: 5 }}>
@@ -200,23 +200,39 @@ const PropertyInfoScreen = () => {
                     </Text>
                 </View>
                 <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} />
-                <Amenities/>
-                <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} /> 
-                <Pressable 
-                style={{
-                    backgroundColor:"#6CB4EE",
-                    paddingVertical:15,
-                    padding:15,
-                    width:"95%",
-                    marginHorizontal:10,
-                    borderRadius:5
+                <Amenities />
+                <Text style={{ borderColor: "lightgray", borderWidth: 3, marginTop: 10, height: 1 }} />
+                <Pressable
+                    onPress={() => navigation.navigate("RoomsScreen", {
+                        rooms: route.params.availableRooms,
+                        oldPrice: route.params.oldPrice,
+                        newPrice: route.params.newPrice,
+                        name: route.params.name,
+                        children: route.params.children,
+                        adults: route.params.adults,
+                        rating: route.params.rating,
+                        startDate: route.params.selectedDates.startDate,
+                        endDate: route.params.selectedDates.endDate
+                    })}
+                    style={{
+                        backgroundColor: "#6CB4EE",
+                        paddingVertical: 15,
+                        padding: 15,
+                        width: "95%",
+                        marginHorizontal: 10,
+                        borderRadius: 5
 
-          
-                }}>
-                <Text style={{textAlign:"center",fontSize:16,color:"white",fontWeight:"600"}}>Select Availabilty</Text>
-            </Pressable>
+
+                    }}>
+                    <Text style={{
+                        textAlign: "center"
+                        , fontSize: 16, color: "white",
+                        fontWeight: "600"
+                    }}>
+                        Select Availabilty</Text>
+                </Pressable>
             </ScrollView>
-           
+
         </View>
     )
 }

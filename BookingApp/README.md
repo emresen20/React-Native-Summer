@@ -1,11 +1,18 @@
-# MapsTutorialApp
+# BookingApp
 
-MapsTutorialApp is a React Native  app for learning how to use maps:
+BookingApp is a React Native  clone app for practise:
 
 
 - Expo
 - useState
 - react-native-maps
+- -firebase
+- -react-native-async-storage/async-storage
+- -react-navigation/bottom-tabs
+- -react-navigation/native
+- -redux
+- -react-native-date-ranges"
+- -vector-icon
 
 
   

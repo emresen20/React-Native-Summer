@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBol8jRzFKWne9OBEWWehrGU1J-0yB3JOs",
   authDomain: "bookingapp-b060a.firebaseapp.com",
@@ -15,7 +17,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const auth =getAuth(app);
-const db = getFirestore();
+// Initialize Firebase Auth with AsyncStorage persistence
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+});
 
-export{auth,db};
+const db = getFirestore(app);
+
+export { auth, db };

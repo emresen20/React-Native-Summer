@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View,AsyncStorage } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
@@ -30,7 +30,7 @@ const LoginScreen = () => {
 //     };
 //     getMyObject();
 //   }, [token]);
-//alttaki metot çalışmas ise bu ile giriş yapılmalı
+//alttaki metot çalışmas ise bu ile giriş
     
     const login=()=>{
         signInWithEmailAndPassword(auth,email,password).then((userCredentials)=>{

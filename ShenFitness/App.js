@@ -4,9 +4,9 @@ import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
-    <View> 
+    <SafeAreaView style={{flex:1}}> 
       <HomeScreen/>
-    </View>
+    </SafeAreaView>
   );
 }
 

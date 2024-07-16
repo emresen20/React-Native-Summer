@@ -41,7 +41,7 @@ const RegisterScreen = () => {
                     <TextInput 
                     onChangeText={(text)=>setEmail(text)}
                         value={email}
-                        placeholder='enter your email id'
+                        placeholder='Enter your Email Id'
                         placeholderTextColor={"black"}
                         style={{
                             borderBottomColor:"gray",

@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable, ScrollView, StatusBar } from 'react-native'
 import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ const WorkOutScreen = () => {
     <>
 
       <ScrollView style={{ backgroundColor: "white" }} showsVerticalScrollIndicator={false}>
+        <StatusBar/>
         <Image style={{ width: "100%", height: 170 }} source={{ uri: route.params.image }} />
         <Ionicons
           onPress={() => navigation.goBack()}

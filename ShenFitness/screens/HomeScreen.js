@@ -1,10 +1,13 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import {  StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import React from 'react';
 import FitnessCards from '../components/FitnessCards';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
+       
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Home WorkOut</Text>

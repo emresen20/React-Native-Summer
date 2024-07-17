@@ -97,6 +97,14 @@ const FitScreen = () => {
                 marginTop: 45
             }}>
                 <Pressable
+                    disabled={index === 0}
+                    onPress={()=>{
+                        navigation.navigate("RestScreen");
+                        setTimeout(() => {
+
+                            setIndex(index - 1)
+                        }, 2000)
+                    }}
                     style={{
                         backgroundColor: "green",
                         padding: 10,

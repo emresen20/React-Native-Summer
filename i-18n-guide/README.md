@@ -1,25 +1,21 @@
-# BookingApp
+# i18n-guide
 
-BookingApp is a React Native  clone app for practise:
+i18n-guide is a React Native  app for language practise:
 
 
 - Expo
 - useState
-- react-native-maps
-- -firebase
-- -react-native-async-storage/async-storage
-- -react-navigation/bottom-tabs
 - -react-navigation/native
-- -redux
-- -react-native-date-ranges"
-- -vector-icon
+- i18next
+
+
 
 
   
 
 Here are some screenshots  of the app:
 
-![Resim 1](https://r.resimlink.com/Q6veH.png)
+![Resim 1](https://hizliresim.com/tmvoc30.png)
 ![Resim 2](https://r.resimlink.com/NDbWV.png)
 ![Resim 3](https://r.resimlink.com/Ksw9W0fPg.png)
 ![Resim 4](https://r.resimlink.com/vUWcVu6X4yL.png)

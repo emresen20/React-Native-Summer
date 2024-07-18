@@ -18,7 +18,7 @@ const WorkOutScreen = () => {
         <Image style={{ width: "100%", height: 170 }} source={{ uri: route.params.image }} />
         <Ionicons
           onPress={() => navigation.goBack()}
-          style={{ position: "absolute", top: 45, left: 15 }}
+          style={{ position: "absolute", top: 15, left: 15 }}
           name="arrow-back"
           size={24}
           color="white" />

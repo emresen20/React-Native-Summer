@@ -14,7 +14,7 @@ export default function App() {
             color: "white",
             textAlign: "center"
           }}>
-          Open up App.js to start working on your app!
+          Select Language
         </Text>
       </Pressable>
 

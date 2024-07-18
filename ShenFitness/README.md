@@ -1,26 +1,23 @@
-# BookingApp
+# ShenFitness
 
-BookingApp is a React Native  clone app for practise:
+ShenFitness is a React Native  spor app for practise:
 
 
 - Expo
 - useState
-- react-native-maps
-- -firebase
-- -react-native-async-storage/async-storage
-- -react-navigation/bottom-tabs
 - -react-navigation/native
-- -redux
-- -react-native-date-ranges"
+-useContext
 - -vector-icon
+- Timer
 
 
   
 
 Here are some screenshots  of the app:
 
-![Resim 1](https://r.resimlink.com/Q6veH.png)
-![Resim 2](https://r.resimlink.com/NDbWV.png)
-![Resim 3](https://r.resimlink.com/Ksw9W0fPg.png)
-![Resim 4](https://r.resimlink.com/vUWcVu6X4yL.png)
-![Resim 5](https://r.resimlink.com/Q6veH.png)
+![Resim 1](https://r.resimlink.com/zrR7yneq3HoT.png)
+![Resim 2](https://r.resimlink.com/jXRV1YecK6l.png)
+![Resim 3](https://r.resimlink.com/Qj70CHJqO.png)
+![Resim 4](https://r.resimlink.com/e9DVOWXk6P.png)
+![Resim 5](https://r.resimlink.com/QP6mqaZzl.png)
+![Resim 6](https://r.resimlink.com/IiuvRZ2BcgpO.png)

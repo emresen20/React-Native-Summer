@@ -10,7 +10,7 @@ const HomeScreen = () => {
        
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Home WorkOut</Text>
+                    <Text style={styles.headerText}>HOME WORKOUT</Text>
                     <View style={styles.statsContainer}>
                         <View style={styles.statItem}>
                             <Text style={styles.statValue}>0</Text>

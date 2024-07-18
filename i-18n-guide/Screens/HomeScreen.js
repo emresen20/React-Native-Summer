@@ -57,8 +57,8 @@ const HomeScreen = ({ navigation }) => {
             {t("change-language")}
           </Text>
         </Pressable>
-        <TouchableOpacity onPress={() => navigation.navigate('FreeScreen')}>
-            <Text>Freeye</Text>
+        <TouchableOpacity  style={{marginTop:100,padding:10,backgroundColor:"red",alignItems:"center"}} onPress={() => navigation.navigate('FreeScreen')}>
+            <Text>{t("tofree")}</Text>
         </TouchableOpacity>
   
         <StatusBar style="auto" />

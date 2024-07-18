@@ -1,10 +1,13 @@
 import {  StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import FitnessCards from '../components/FitnessCards';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FitnessItems } from './Context';
 
 const HomeScreen = () => {
+    const {completed,setComplated,workout,setWorkout,calories,setCalories,minutes,setMinutes}=useContext(FitnessItems)
+    
     return (
         <SafeAreaView style={styles.safeArea}>
        
@@ -13,15 +16,15 @@ const HomeScreen = () => {
                     <Text style={styles.headerText}>HOME WORKOUT</Text>
                     <View style={styles.statsContainer}>
                         <View style={styles.statItem}>
-                            <Text style={styles.statValue}>0</Text>
+                            <Text style={styles.statValue}>{workout}</Text>
                             <Text style={styles.statLabel}>WORKOUTS</Text>
                         </View>
                         <View style={styles.statItem}>
-                            <Text style={styles.statValue}>0</Text>
+                            <Text style={styles.statValue}>{Number(calories).toFixed(2)}</Text>
                             <Text style={styles.statLabel}>KCAL</Text>
                         </View>
                         <View style={styles.statItem}>
-                            <Text style={styles.statValue}>0</Text>
+                            <Text style={styles.statValue}>{minutes}</Text>
                             <Text style={styles.statLabel}>MINS</Text>
                         </View>
                     </View>

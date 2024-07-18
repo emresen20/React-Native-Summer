@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FitnessItems } from './Context';
 
 const FitScreen = () => {
     const route = useRoute();
@@ -10,7 +11,8 @@ const FitScreen = () => {
     const current = excersise[index];
     const navigation = useNavigation();
 
-    console.log(current, "ilk")
+    const {completed,setComplated,workout,setWorkout,calories,setCalories,minutes,setMinutes}=useContext(FitnessItems)
+    console.log("completed",completed)
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <Image style={{ width: "100%", height: 360 }} source={{ uri: current.image }} />
@@ -61,6 +63,10 @@ const FitScreen = () => {
                 <Pressable
                     onPress={() => {
                         navigation.navigate("RestScreen")
+                        setComplated([...completed,current.name])  
+                        setWorkout(workout+1)
+                        setMinutes(minutes+2.5)
+                        setCalories(calories+6.30)
 
                         setTimeout(() => {
 
@@ -98,7 +104,7 @@ const FitScreen = () => {
             }}>
                 <Pressable
                     disabled={index === 0}
-                    onPress={()=>{
+                    onPress={() => {
                         navigation.navigate("RestScreen");
                         setTimeout(() => {
 
@@ -127,7 +133,7 @@ const FitScreen = () => {
 
                     <Pressable
 
-                        onPress={()=> navigation.navigate("HomeScreen")}
+                        onPress={() => navigation.navigate("HomeScreen")}
 
                         style={{
                             backgroundColor: "green",

@@ -2,25 +2,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import client from '../Apollo';
 import { gql } from '@apollo/client';
+import Questions from '../Questions/Questions';
 
 const HomeScreen = () => {
-    useEffect(()=>{
-        client
-  .query({
-    query: gql`
-      query  QuestionsQuery{
-      questions{
-      id
-      text
-      }
-      }
-    `,
-  })
-  .then((result) => console.log(result.data));
-    })
+   
   return (
     <View>
-      <Text>HomeScreen</Text>
+      <Questions/>
     </View>
   )
 }

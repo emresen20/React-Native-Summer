@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import AddButton from './components/AddButton';
+import Detail from './screens/Detail';
 
 
 
@@ -15,7 +16,8 @@ function Router() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="HomeScreen"component={HomeScreen} options={{title:"Questions"}} />
-            </Stack.Navigator>
+                <Stack.Screen name='Detail' component={Detail} />
+            </Stack.Navigator> 
         </NavigationContainer>
     );
 }

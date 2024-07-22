@@ -3,10 +3,12 @@ import React from 'react'
 import { gql, useQuery, useSubscription } from '@apollo/client'
 import { GET_QUESTIONS_Subscription } from './queries';
 import Loading from '../components/Loading';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const Questions = () => {
+  const navigation = useNavigation()
 
     const { data ,loading,error} = useSubscription(GET_QUESTIONS_Subscription);
     console.log("data",data)
@@ -20,7 +22,11 @@ const Questions = () => {
         return (
           <>
             {data.questions.map((question, index) => (
-                <TouchableOpacity key={index} 
+                <TouchableOpacity 
+                onPress={()=> navigation.navigate("Detail",{
+                  id:question.id
+                })}
+                key={index} 
                 style={{
                     alignItems:"center",
                     borderBottomWidth:1,

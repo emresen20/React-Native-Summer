@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native'
 import { useQuery } from '@apollo/client';
 import { GET_QUESTION_DETAIL } from './queriesdetail';
 import Loading from '../components/Loading';
+import Form from '../components/Form';
 
 const Detail = () => {
     const route=useRoute();
@@ -26,7 +27,7 @@ const Detail = () => {
   return (
     <View>
       <Text>{text}</Text>
-      <Text>{JSON.stringify(options)}</Text>
+      <Form options={options}/>
     </View>
   )
 }

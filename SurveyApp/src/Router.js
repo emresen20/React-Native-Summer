@@ -14,7 +14,7 @@ function Router() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="HomeScreen"component={HomeScreen} />
+                <Stack.Screen name="HomeScreen"component={HomeScreen} options={{title:"Questions"}} />
             </Stack.Navigator>
         </NavigationContainer>
     );

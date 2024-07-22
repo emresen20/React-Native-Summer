@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { gql, useQuery, useSubscription } from '@apollo/client'
 import { GET_QUESTIONS_Subscription } from './queries';
+import Loading from '../components/Loading';
 
 
 
@@ -10,7 +11,7 @@ const Questions = () => {
     const { data ,loading,error} = useSubscription(GET_QUESTIONS_Subscription);
     console.log("data",data)
     if(loading){
-       return <Text>loading...</Text>
+       return <Loading/>
     }
     if(error){
         return <Text>{JSON.stringify(error)}</Text>

@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMutation } from '@apollo/client';
 import { NEW_ANSWER_MUTATION } from '../screens/queriesdetail';
 
-const Form = ({ options }) => {
+const Form = ({ options,setIsVoted }) => {
     const [selected, setSelected] = useState("");
 
     const handlePress = (id) => {
@@ -24,6 +24,7 @@ const Form = ({ options }) => {
             }
         })
         alert("succses")
+        setIsVoted(true)
 
     }
 

@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}) => {
         
         
         >
-           <AddNewModal/>
+           <AddNewModal closeModal={()=>setModalVisiable(false)}/>
         
       </Modal>
     </View>

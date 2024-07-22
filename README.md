@@ -1,4 +1,4 @@
-# What I developed in the summer
+# Summer Bootcamp
 
 1) AuthWithRedux
 2) BookingApp

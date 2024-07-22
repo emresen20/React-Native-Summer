@@ -29,7 +29,7 @@ const Detail = () => {
     const {text,options}= data.questions_by_pk;
 
   return (
-    <View>
+    <View style={{margin:10}}>
       <Text>{text}</Text>
       {
         !isVoted?<Form options={options} setIsVoted={setIsVoted}/>

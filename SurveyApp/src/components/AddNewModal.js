@@ -65,7 +65,7 @@ const AddNewModal = ({closeModal}) => {
                 options.map((item, i) => (
                     <TextInput
                         style={styles.textinput}
-                        placeholder='Enter a new question'
+                        placeholder='Enter a new options'
                         value={item.text}
                         key={i}
                         onChangeText={(val) => handleOptionChange(val, i)}

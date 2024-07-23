@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-nativ
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { auth } from '../auth'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -10,9 +10,28 @@ const LoginScreen = () => {
   const [password,setPassword]=useState("")
 
   const handleSignUp = () => {
+    if(!email || !password){
+      return;
+    }
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        alert("registered")
+        console.log("user", user);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+ 
+
+  const handleLogin = () => {
+    if(!email || !password){
+      return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        alert("logged");
         console.log("user", user);
       })
       .catch((error) => alert(error.message));
@@ -45,7 +64,7 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
       
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       

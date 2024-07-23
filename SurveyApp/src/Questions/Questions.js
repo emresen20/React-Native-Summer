@@ -4,6 +4,7 @@ import { gql, useQuery, useSubscription } from '@apollo/client'
 import { GET_QUESTIONS_Subscription } from './queries';
 import Loading from '../components/Loading';
 import { useNavigation } from '@react-navigation/native';
+import EmptyList from '../components/EmptyList';
 
 
 
@@ -39,6 +40,9 @@ const Questions = () => {
             ))}
           </>
         );
+      }
+      else{
+        return <EmptyList message={"No surveys yet"}/>
       }
     
       return null;

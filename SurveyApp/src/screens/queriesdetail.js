@@ -14,8 +14,8 @@ query DetailQuery($id: Int!){
 `
 
 export const NEW_ANSWER_MUTATION = gql`
-mutation NewAnswer($option_id: Int!) {
-  insert_answers_one(object: {option_id:$option_id}) {
+mutation NewAnswer($option_id: Int!,$user_id: String!) {
+  insert_answers_one(object: {option_id:$option_id, user_id: $user_id}) {
     id
   }
 }

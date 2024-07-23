@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMutation } from '@apollo/client';
 import { NEW_ANSWER_MUTATION } from '../screens/queriesdetail';
+import { auth } from '../auth';
 
 const Form = ({ options,setIsVoted }) => {
     const [selected, setSelected] = useState("");
+    console.log("auth.currentUser",auth.currentUser.uid)
 
     const handlePress = (id) => {
         setSelected(id)
@@ -20,7 +22,8 @@ const Form = ({ options,setIsVoted }) => {
         }
         await newAnswer({
             variables:{
-                option_id:selected
+                option_id:selected,
+                user_id:auth.currentUser?.uid
             }
         })
         alert("succses")

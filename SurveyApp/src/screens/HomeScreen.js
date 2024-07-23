@@ -11,8 +11,12 @@ const HomeScreen = ({navigation}) => {
    React.useLayoutEffect(()=>{
     navigation.setOptions({
         headerRight:()=>(
-            <AddButton onPress={()=> setModalVisiable((prev)=> !prev)}/>
-        )
+            <AddButton  icon_name="plus" onPress={()=> setModalVisiable((prev)=> !prev)}/>
+        ),
+        headerLeft:()=>(
+          <AddButton icon_name="user" onPress={()=> navigation.navigate("ProfileScreen")} />
+      )
+        
     })
    })
   return (

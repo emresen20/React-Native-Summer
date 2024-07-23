@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import AddButton from './components/AddButton';
 import Detail from './screens/Detail';
+import LoginScreen from './screens/LoginScreen';
 
 
 
@@ -14,9 +15,10 @@ const Stack = createNativeStackNavigator();
 function Router() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName='LoginScreen'>
                 <Stack.Screen name="HomeScreen"component={HomeScreen} options={{title:"Questions"}} />
                 <Stack.Screen name='Detail' component={Detail} />
+                <Stack.Screen name='LoginScreen' component={LoginScreen} options={{headerShown:false}}/>
             </Stack.Navigator> 
         </NavigationContainer>
     );

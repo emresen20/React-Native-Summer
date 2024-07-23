@@ -1,13 +1,24 @@
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { auth } from '../auth'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const navigation = useNavigation();
+
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged((user)=>{
+      if(user){
+        navigation.replace("HomeScreen")
+      }
+    })
+    return unsubscribe
+  },[])
 
   const handleSignUp = () => {
     if(!email || !password){

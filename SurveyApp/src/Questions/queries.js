@@ -28,3 +28,20 @@ mutation AddNewQuestionMutation(
   }
 }
 `
+
+export const DELETE_QUESTION_MUTATION= gql`
+  mutation DeleteQuestion ($id: Int!){
+  delete_questions_by_pk(id: $id) {
+    id
+  }
+}
+
+`
+
+export const DELETE_ANSWERS_MUTATION = gql`
+  mutation DeleteAnswers($question_id: Int!) {
+    delete_answers(where: { question_id: { _eq: $question_id } }) {
+      affected_rows
+    }
+  }
+`;

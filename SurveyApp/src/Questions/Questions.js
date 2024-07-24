@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { gql, useQuery, useSubscription } from '@apollo/client'
-import { GET_QUESTIONS_Subscription } from './queries';
+import { gql, useMutation, useQuery, useSubscription } from '@apollo/client'
+import { DELETE_QUESTION_MUTATION, GET_QUESTIONS_Subscription } from './queries';
 import Loading from '../components/Loading';
 import { useNavigation } from '@react-navigation/native';
 import EmptyList from '../components/EmptyList';
@@ -11,9 +11,12 @@ import { auth } from '../auth';
 
 const Questions = () => {
   const navigation = useNavigation()
+  console.log("data", data)
+  
+
 
   const { data, loading, error } = useSubscription(GET_QUESTIONS_Subscription);
-  console.log("data", data)
+ 
   if (loading) {
     return <Loading />
   }
@@ -30,13 +33,13 @@ const Questions = () => {
               <TouchableOpacity
                 style={styles.deleteButton}
                 onPress={() => {
-                  if (auth.currentUser.uid === question.user_id) {
-                    console.warn("Silinecek:", question.id);
-                  } else {
-                    alert("Bu size ait değil");
+                  navigation.navigate("Detail", { id: question.id , user_id:question.user_id})
+                  alert("Deleting Are You Sure")
+                }
                   }
-                }}
+                  
               >
+                
                 <MaterialIcons name="delete" size={24} color="white" />
               </TouchableOpacity>
             )}
@@ -44,7 +47,7 @@ const Questions = () => {
             <View style={styles.questionContainer}>
               <TouchableOpacity
                 style={styles.questionButton}
-                onPress={() => navigation.navigate("Detail", { id: question.id })}
+                onPress={() => navigation.navigate("Detail", { id: question.id , user_id:question.user_id})}
               >
                 <Text style={styles.questionText}>{question.text}</Text>
               </TouchableOpacity>

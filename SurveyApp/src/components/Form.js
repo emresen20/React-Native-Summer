@@ -4,10 +4,28 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMutation } from '@apollo/client';
 import { NEW_ANSWER_MUTATION } from '../screens/queriesdetail';
 import { auth } from '../auth';
+import { DELETE_QUESTION_MUTATION } from '../Questions/queries';
+import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const Form = ({ options,setIsVoted,id }) => {
+const Form = ({ options,setIsVoted,id,user_id }) => {
     const [selected, setSelected] = useState("");
     console.log("auth.currentUser",auth.currentUser.uid)
+
+    const navigation=useNavigation();
+
+    
+    const [deleteQuestion]= useMutation(DELETE_QUESTION_MUTATION,{
+        variables:{
+          id
+       
+        }
+      })
+  
+      const handleDelete= async()=>{
+        await deleteQuestion()
+              
+      }
 
     const handlePress = (id) => {
         setSelected(id)
@@ -75,6 +93,20 @@ const Form = ({ options,setIsVoted,id }) => {
                     )}
           
             </Pressable>
+
+            <Pressable
+      style={{marginTop:20,alignSelf:"center"}}
+        onPress={() => {
+          if (auth.currentUser.uid === user_id) {
+            handleDelete();
+          } else {
+            alert('Bu size ait değil');
+          }
+        }}
+      >
+        <MaterialIcons name="delete" size={50} color="red" />
+      </Pressable>
+           
         </View>
     )
 }

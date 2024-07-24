@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { ADD_NEW_QUESTION_MUTATION } from '../Questions/queries';
 import { useMutation } from '@apollo/client';
+import { auth } from '../auth';
 
 const AddNewModal = ({closeModal}) => {
 
@@ -44,6 +45,7 @@ const AddNewModal = ({closeModal}) => {
         const result = await addNewQuestion({
             variables: {
                 title,
+                user_id:auth.currentUser.uid,
                 options:options_data
             }
         })

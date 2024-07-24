@@ -3,13 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import Router from './src/Router';
 import { ApolloProvider } from '@apollo/client';
 import client from './src/Apollo';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-       <Router/>
-    </ApolloProvider>
-  
+    <GestureHandlerRootView>
+      <ApolloProvider client={client}>
+        <Router />
+      </ApolloProvider>
+
+    </GestureHandlerRootView>
+
   );
 }
 

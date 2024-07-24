@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { NEW_ANSWER_MUTATION } from '../screens/queriesdetail';
 import { auth } from '../auth';
 
-const Form = ({ options,setIsVoted }) => {
+const Form = ({ options,setIsVoted,id }) => {
     const [selected, setSelected] = useState("");
     console.log("auth.currentUser",auth.currentUser.uid)
 
@@ -23,7 +23,8 @@ const Form = ({ options,setIsVoted }) => {
         await newAnswer({
             variables:{
                 option_id:selected,
-                user_id:auth.currentUser?.uid
+                user_id:auth.currentUser?.uid,
+                question_id:id
             }
         })
         alert("succses")

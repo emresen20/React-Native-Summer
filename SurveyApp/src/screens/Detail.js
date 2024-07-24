@@ -6,6 +6,7 @@ import { GET_QUESTION_DETAIL } from './queriesdetail';
 import Loading from '../components/Loading';
 import Form from '../components/Form';
 import Result from './Result';
+import { auth } from '../auth';
 
 const Detail = () => {
     const route=useRoute();
@@ -17,7 +18,9 @@ const Detail = () => {
     const {loading,data}= useQuery(GET_QUESTION_DETAIL, {
         variables:{
             id,
-        }
+            user_id:auth.currentUser?.uid
+        },
+        fetchPolicy:"network-only" // oy verdikten sonra bir daha oy verilememesi için datamıza yeni güncelleme atıyor
     })
 
     console.log("data",data)
@@ -26,13 +29,13 @@ const Detail = () => {
         return <Loading/>
     }
 
-    const {text,options}= data.questions_by_pk;
+    const {text,options,answers}= data.questions_by_pk;
 
   return (
     <View style={{margin:10}}>
       <Text>{text}</Text>
       {
-        !isVoted?<Form options={options} setIsVoted={setIsVoted}/>
+        (!isVoted && answers.length < 1 ) ?<Form options={options} setIsVoted={setIsVoted} id={id}/>
         :<Result id={id}/>
       }
       

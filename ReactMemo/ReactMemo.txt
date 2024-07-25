@@ -1,0 +1,11 @@
+React memo ne için kullanılır?
+
+Örneğin home sayfamız olsun home sayfası içinde header componentini çağırıyoruz.
+home sayfamızda counter statesi olsun state her arttıdığında bizim home sayfamız ve header yeniden render ediliyor
+Header componentinin yeniden render edilmesini istemediğimiz durumlarda React memo kullanırız.
+Asıl mantığı önceki propertilerle yeni propertileri karşılaştırır aynı ise renden etmez farklı ise render eder.
+
+
+Header componentinin exportuna şu şekilde yazmamız yeterli olacaktır
+
+export default React.memo(Header);

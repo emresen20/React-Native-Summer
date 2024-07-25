@@ -30,6 +30,19 @@ const user = useMemo(()=>(
 
 ),[name])    // name her güncellendiğinde tetiklenmesi için name yi oraya koyduk
 
+
+
+useCallback() Ne için kullanılır ?
+
+Fonksiyonlar içinde eşitlik diğer sayfada olmadığında usecallbacki aynı usememo gibi fakat
+fonksiyonlar için kullanabiliriz. 
+
+kullanımı şu şekildedir
+
+const increment = useCallback((amount)=>{
+	setCount((prev)=> prev+amount; //bunu stateyi tekrar tetikletip companonti de tekrar render etmemesi için kullandık
+},[])
+
 	
 
 

@@ -9,3 +9,28 @@ Asıl mantığı önceki propertilerle yeni propertileri karşılaştırır ayn�
 Header componentinin exportuna şu şekilde yazmamız yeterli olacaktır
 
 export default React.memo(Header);
+
+
+
+UseMemo Ne için kullanılır?
+
+Sayfalarda primity türler birbirine eşit olabilir string int gibi
+fakat array ve objeler birbirine eşit olamadığından react memo kullanmamız bir işe yaramayacaktır
+Bu durumda usememo kullanılır
+
+örnek kullanımı şu şekildedir:
+
+const [name,setName]=useState("Mehmet)
+
+const user = useMemo(()=>(
+	{
+		id:1,
+		name,
+	}
+
+),[name])    // name her güncellendiğinde tetiklenmesi için name yi oraya koyduk
+
+	
+
+
+

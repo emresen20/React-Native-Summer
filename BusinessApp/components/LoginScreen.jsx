@@ -1,9 +1,32 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors'
+import * as WebBrowser from "expo-web-browser"
+import {useWarmUpBrowser} from "../hooks/useWarmUpBrowser"
+import { useOAuth } from '@clerk/clerk-expo'
 
+WebBrowser.maybeCompleteAuthSession();
 
 const LoginScreen = () => {
+    useWarmUpBrowser();
+
+    const {startOAuthFlow} = useOAuth({strategy:"oauth_google"});
+
+    const onPress = React.useCallback(async()=>{
+        try{
+            const {createdSessionId, signIn,signUp,setActive}=
+            await startOAuthFlow();
+
+            if(createdSessionId){
+                setActive({session: createdSessionId});
+            }else{
+                //use signin or signuğ
+            }
+        }catch (err){
+            console.error("OAuth error",err)
+        }
+    },[])
+
     return (
         <View>
 
@@ -20,6 +43,7 @@ const LoginScreen = () => {
                         Find your favorite business near your and post your own business to your community
                     </Text>
                     <TouchableOpacity 
+                        onPress={onPress}
                         style={styles.buttonstarted}>
                         <Text style={styles.buttontext}>
                             Let's Get Started

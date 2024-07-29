@@ -4,6 +4,8 @@ import { Colors } from '@/constants/Colors'
 import * as WebBrowser from "expo-web-browser"
 import {useWarmUpBrowser} from "../hooks/useWarmUpBrowser"
 import { useOAuth } from '@clerk/clerk-expo'
+import { AntDesign } from '@expo/vector-icons';
+
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -45,8 +47,9 @@ const LoginScreen = () => {
                     <TouchableOpacity 
                         onPress={onPress}
                         style={styles.buttonstarted}>
+                        <AntDesign name="google" size={24} color="white" />
                         <Text style={styles.buttontext}>
-                            Let's Get Started
+                            Continue With Google
                         </Text>
                     </TouchableOpacity>
             </View>
@@ -93,7 +96,10 @@ const styles = StyleSheet.create({
         backgroundColor:Colors.PRIMARY,
         padding:10,
         borderRadius:99,
-        marginTop:20
+        marginTop:20,
+        flexDirection:"row",
+        justifyContent:"center",
+        gap:10
     },
     buttontext:{
         textAlign:"center",

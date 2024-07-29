@@ -8,46 +8,20 @@ const LoginScreen = () => {
         <View>
 
             <View
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginTop: 90
-                }}>
+                style={styles.imageview}>
                 <Image
-                    style={{
-                        width: 220,
-                        height: 450,
-                        borderRadius: 20,
-                        borderWidth: 3,
-                        borderColor: "black"
-                    }}
+                    style={styles.imagephoto}
                     source={require("./../assets/images/login.png")} />
             </View>
-            <View style={{
-                backgroundColor: "#fff",
-                padding:20,
-                marginTop:-18
-            }}>
-                <Text style={{
-                    fontSize:25,
-                    fontFamily:'outfit-bold',
-                    textAlign:"center"
-                }}>Your Ultimate <Text style={{color:"purple"}}>
+            <View style={styles.underview}>
+                <Text style={styles.bigtext}>Your Ultimate <Text style={{color:Colors.PRIMARY}}>
                     Community Business Directory</Text> App</Text>
-                    <Text style={{
-                        fontSize:15,
-                        fontFamily:"outfit",
-                        textAlign:"center",
-                        marginVertical:13,
-                        color:Colors.GRAY
-                    }}>
+                    <Text style={styles.graytext}>
                         Find your favorite business near your and post your own business to your community
                     </Text>
                     <TouchableOpacity 
-                        style={{
-                            
-                        }}>
-                        <Text>
+                        style={styles.buttonstarted}>
+                        <Text style={styles.buttontext}>
                             Let's Get Started
                         </Text>
                     </TouchableOpacity>
@@ -61,5 +35,46 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    imageview:{
+        display: "flex",
+        alignItems: "center",
+        marginTop: 90,
+    },
+    imagephoto:{
+        width: 220,
+        height: 450,
+        borderRadius: 20,
+        borderWidth: 3,
+        borderColor: "black"
+    },
+    underview:{
+        backgroundColor: "#fff",
+        padding:20,
+        marginTop:-18
+    },
+    bigtext:{
+        fontSize:25,
+        fontFamily:'outfit-bold',
+        textAlign:"center"
+    },
+    graytext:{
+        fontSize:15,
+        fontFamily:"outfit",
+        textAlign:"center",
+        marginVertical:13,
+        color:Colors.GRAY
+    },
+    buttonstarted:{
+        alignItems:"center",
+        backgroundColor:Colors.PRIMARY,
+        padding:10,
+        borderRadius:99,
+        marginTop:20
+    },
+    buttontext:{
+        textAlign:"center",
+        color:"#fff",
+        fontFamily:'outfit'
+    }
 
 })

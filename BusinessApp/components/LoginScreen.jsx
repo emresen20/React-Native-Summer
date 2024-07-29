@@ -43,7 +43,10 @@ const LoginScreen = () => {
                     }}>
                         Find your favorite business near your and post your own business to your community
                     </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity 
+                        style={{
+                            
+                        }}>
                         <Text>
                             Let's Get Started
                         </Text>

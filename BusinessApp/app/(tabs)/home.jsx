@@ -1,11 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
+import Header from '../../components/Home/Header'
 
 const home = () => {
   return (
-    <View>
-      <Text style={{fontFamily:"outfit-bold",fontSize:50}}>home</Text>
-    </View>
+    <SafeAreaView>
+      {/* {HEAder} */}
+
+      <Header/>
+      {/* {Slider} */}
+      {/* {CAtegory} */}
+      {/* {Popular Business List} */}
+    </SafeAreaView>
   )
 }
 

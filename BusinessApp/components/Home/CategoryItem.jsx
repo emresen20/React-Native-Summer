@@ -2,8 +2,10 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable } from 'reac
 import React from 'react'
 import { Colors } from "../../constants/Colors"
 const CategoryItem = ({ category,onCategoryPress }) => {
+  //onPress={(category)=>onCategoryPress(category)} bunu  böyle yazınca sıkıntı oluyor uzun istenmeyen data dönüyor
   return (
     <TouchableOpacity onPress={()=>onCategoryPress(category)} >
+      
       <View style={styles.categoryView}> 
         <Image
           style={styles.imageStyle}

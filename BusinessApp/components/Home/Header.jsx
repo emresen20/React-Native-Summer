@@ -14,7 +14,7 @@ const Header = () => {
                     source={{ uri: user?.imageUrl }} />
 
                 <View>
-                    <Text style={{color:"white"}}>Welcome</Text>
+                    <Text style={{color:"white"}}>Welcome,</Text>
                     <Text style={styles.fullnametext}>{user?.fullName}</Text>
                 </View>
             </View>

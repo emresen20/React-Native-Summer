@@ -11,7 +11,6 @@ const Slider = () => {
 
     useEffect(()=>{
         GetSliderList();
-        console.log("dsfsd")
     },[])
 
 
@@ -63,9 +62,10 @@ const styles = StyleSheet.create({
         fontSize:20,
         paddingLeft:18,
         paddingTop:18,
-        marginBottom:3
+        marginBottom:1
     },
     flatliststyle:{
-        padding:20
+        padding:17,
+       
     }
 })

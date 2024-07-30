@@ -1,11 +1,14 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Colors } from '../../constants/Colors'
 import { collection, getDocs, query } from 'firebase/firestore'
 import { db } from '../../config/FirebaseConfig'
 import CategoryItem from './CategoryItem'
+import { useRouter } from 'expo-router'
 
 const Category = () => {
+
+    const router=useRouter();
 
     const[category,setCategory]=useState([])
     useEffect(()=>{
@@ -41,7 +44,7 @@ const Category = () => {
                 <CategoryItem 
                 category={item} 
                 key={index}
-                onCategoryPress={()=>console.log("yeniii",item)}
+                onCategoryPress={(category)=> router.push('/businesslist/'+item.name)} // burada yolluyoruz
                 />
             )}
             

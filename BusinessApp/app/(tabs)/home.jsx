@@ -1,12 +1,13 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
 import Header from '../../components/Home/Header'
 import Slider from '../../components/Home/Slider'
 import Category from '../../components/Home/Category'
+import PopulerBusiness from '../../components/Home/PopulerBusiness'
 
 const home = () => {
   return (
-    <SafeAreaView>
+    <ScrollView>
       {/* {HEAder} */}
 
       <Header/>
@@ -15,7 +16,12 @@ const home = () => {
       {/* {CAtegory} */}
       <Category/>
       {/* {Popular Business List} */}
-    </SafeAreaView>
+      <PopulerBusiness/>
+
+      <View style={{height:20}}>
+
+      </View>
+    </ScrollView>
   )
 }
 

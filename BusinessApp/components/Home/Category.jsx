@@ -41,7 +41,7 @@ const Category = () => {
                 <CategoryItem 
                 category={item} 
                 key={index}
-                onCategoryPress={(value)=>console.log("yeniii",value)}
+                onCategoryPress={()=>console.log("yeniii",item)}
                 />
             )}
             

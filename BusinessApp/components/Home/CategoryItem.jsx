@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Pressable } from 'react-native'
 import React from 'react'
 import { Colors } from "../../constants/Colors"
-const CategoryItem = ({ category }) => {
+const CategoryItem = ({ category,onCategoryPress }) => {
   return (
-    <View >
+    <TouchableOpacity onPress={()=>onCategoryPress(category)} >
       <View style={styles.categoryView}> 
         <Image
           style={styles.imageStyle}
@@ -19,7 +19,7 @@ const CategoryItem = ({ category }) => {
         {category.name}
         </Text>
 
-    </View>
+    </TouchableOpacity>
   )
 }
 

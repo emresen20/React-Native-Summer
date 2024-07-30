@@ -38,7 +38,11 @@ const Category = () => {
             horizontal={true}
             data={category}
             renderItem={({item,index})=>(
-                <CategoryItem category={item} key={index}/>
+                <CategoryItem 
+                category={item} 
+                key={index}
+                onCategoryPress={(value)=>console.log("yeniii",value)}
+                />
             )}
             
             />

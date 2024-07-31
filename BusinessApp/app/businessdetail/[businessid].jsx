@@ -1,10 +1,12 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import { collection, doc, getDoc, query, where } from 'firebase/firestore'
 import { db } from '../../config/FirebaseConfig'
 import { Colors } from '../../constants/Colors'
 import Intro from '../../components/BusinessDetail/Intro'
+import ActionButton from '../../components/BusinessDetail/ActionButton'
+import About from '../../components/BusinessDetail/About'
 
 const BusinessDetail = () => {
   const {businessid}=useLocalSearchParams([])
@@ -39,7 +41,7 @@ const BusinessDetail = () => {
 
 
   return (
-    <View>
+    <ScrollView>
       {loading?
       <ActivityIndicator size={"large"} color={Colors.PRIMARY} 
         style={{marginTop:"85%"}}
@@ -49,13 +51,14 @@ const BusinessDetail = () => {
           <Intro business={businessDetail}/>
 
           {/* Action Buttons */}
-
+            <ActionButton business={businessDetail}/>
 
           {/* About Section */}
+          <About business={businessDetail}/>
           </View>
       }
       
-    </View>
+    </ScrollView>
   )
 }
 

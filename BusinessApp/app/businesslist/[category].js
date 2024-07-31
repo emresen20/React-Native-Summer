@@ -46,6 +46,8 @@ const BusinesssListByCategory = () => {
     <View>
       {businessList?.length>0 && loading==false?
          <FlatList
+         onRefresh={getBusinessList} //yukarıdan çekince neyin tetikleneceği
+         refreshing={loading}   // tetklenirken ne geleceği loadingin
          data={businessList}
          renderItem={({item,index})=>(
            <BusinessListCard 

@@ -46,11 +46,14 @@ const Category = () => {
                 key={index}
                 onCategoryPress={(category)=> router.push('/businesslist/'+item.name)} // burada yolluyoruz
                 />
+                
             )}
             
             />
+            
 
         </View>
+        
     )
 }
 

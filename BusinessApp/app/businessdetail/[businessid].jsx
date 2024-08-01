@@ -7,57 +7,64 @@ import { Colors } from '../../constants/Colors'
 import Intro from '../../components/BusinessDetail/Intro'
 import ActionButton from '../../components/BusinessDetail/ActionButton'
 import About from '../../components/BusinessDetail/About'
+import Reviews from '../../components/BusinessDetail/Reviews'
+
 
 const BusinessDetail = () => {
-  const {businessid}=useLocalSearchParams([])
+  const { businessid } = useLocalSearchParams([])
 
-  const [businessDetail,setBusinessDetail]=useState([])
+  const [businessDetail, setBusinessDetail] = useState([])
 
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
 
 
-  useEffect(()=> {
+  useEffect(() => {
     GetBusinessDetailById()
-    console.log("businessDetail",businessDetail)
-  },[])
+    console.log("businessDetail", businessDetail)
+  }, [])
 
-  const GetBusinessDetailById=async()=>{
-      setLoading(true)
-      const docRef=doc(db,'BusinessList',businessid)
-      const docSnap=await getDoc(docRef);
-      if(docSnap.exists()){
-        console.log("datammmm",docSnap.data())
-        const data = docSnap.data()
-        setBusinessDetail(data)
-        setLoading(false)
-        
-      }else{
-        console.log("No data")
-       
-      }
-      
+  const GetBusinessDetailById = async () => {
+    setLoading(true)
+    const docRef = doc(db, 'BusinessList', businessid)
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("datammmm", docSnap.data())
+      const data = docSnap.data()
+      setBusinessDetail(data)
+      setLoading(false)
+
+    } else {
+      console.log("No data")
+
+    }
+
   }
 
 
   return (
-    <ScrollView>
-      {loading?
-      <ActivityIndicator size={"large"} color={Colors.PRIMARY} 
-        style={{marginTop:"85%"}}
-      />:
+    <ScrollView style={{height:"300%"}}>
+      {loading ?
+        <ActivityIndicator size={"large"} color={Colors.PRIMARY}
+          style={{ marginTop: "85%" }}
+        /> :
         <View>
           {/* Intro Conponents businessDetail */}
-          <Intro business={businessDetail}/>
+          <Intro business={businessDetail} />
 
           {/* Action Buttons */}
-            <ActionButton business={businessDetail}/>
+          <ActionButton business={businessDetail} />
 
           {/* About Section */}
-          <About business={businessDetail}/>
-          </View>
+          
+          <About business={businessDetail} />
+
+          {/* revies */}
+          <Reviews business={businessDetail}/>
+
+        </View>
       }
-      
+
     </ScrollView>
   )
 }

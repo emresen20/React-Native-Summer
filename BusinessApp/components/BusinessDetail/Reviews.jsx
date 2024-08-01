@@ -5,6 +5,7 @@ import { Colors } from "../../constants/Colors"
 import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../config/FirebaseConfig'
 import { useUser } from '@clerk/clerk-expo'
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 const Reviews = ({ business }) => {
 
@@ -112,8 +113,8 @@ const Reviews = ({ business }) => {
                         </View>
 
                         {item.userEmail === user?.primaryEmailAddress?.emailAddress && (
-                            <TouchableOpacity onPress={() => onDeleteReview(item)}>
-                                <Text style={styles.deleteText}>Sil</Text>
+                            <TouchableOpacity onPress={() => onDeleteReview(item)} style={{marginLeft:150}}>
+                                <FontAwesome5 name="trash" size={24} color={Colors.PRIMARY} />
                             </TouchableOpacity>
                         )}
                     </View>

@@ -1,10 +1,27 @@
 import { StyleSheet, Text, View,TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Colors } from '../../constants/Colors'
 import { AntDesign } from '@expo/vector-icons';
 import Category from "../../components/Home/Category"
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../config/FirebaseConfig';
+import ExploreBusinessList from '../../components/explore/ExploreBusinessList';
+
 
 const explore = () => {
+
+  const [businessList,setBusinessList]=useState([])
+
+  const GetBusinessListByCategory=async (category)=>{
+    setBusinessList([])
+    const q=query(collection(db,"BusinessList"),where("category","==",category));
+    const querySnapshot=await getDocs(q)
+    querySnapshot.forEach((doc)=>{
+      setBusinessList(prev=>[...prev,{id:doc.id,...doc.data()}])
+    })
+  }
+
+
   return (
     <View style={styles.container}>
     <Text style={styles.exploreText}>
@@ -19,10 +36,11 @@ const explore = () => {
     {/* Category */}
       <Category
       explore={true}
-      onCategorySelect={(val)=>console.log("category",val)}
+      onCategorySelect={(val)=>GetBusinessListByCategory(val)}
       
       />
     {/* BusinessList */}
+    <ExploreBusinessList businessList={businessList}/>
   </View>
   )
 }

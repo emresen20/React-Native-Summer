@@ -113,7 +113,7 @@ const Reviews = ({ business }) => {
                         </View>
 
                         {item.userEmail === user?.primaryEmailAddress?.emailAddress && (
-                            <TouchableOpacity onPress={() => onDeleteReview(item)} style={{marginLeft:150}}>
+                            <TouchableOpacity onPress={() => onDeleteReview(item)} style={{marginLeft:100}}>
                                 <FontAwesome5 name="trash" size={24} color={Colors.PRIMARY} />
                             </TouchableOpacity>
                         )}

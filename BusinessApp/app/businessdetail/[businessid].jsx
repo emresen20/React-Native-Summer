@@ -30,8 +30,7 @@ const BusinessDetail = () => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("datammmm", docSnap.data())
-      const data = docSnap.data()
-      setBusinessDetail(data)
+      setBusinessDetail({id:docSnap.id,...docSnap.data()})
       setLoading(false)
 
     } else {

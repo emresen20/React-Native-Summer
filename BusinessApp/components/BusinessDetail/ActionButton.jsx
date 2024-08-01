@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View,Image, TouchableOpacity, Linking } from 'react-native'
+import { FlatList, StyleSheet, Text, View,Image, TouchableOpacity, Linking, Share } from 'react-native'
 import React from 'react'
 
 const ActionButton = ({business}) => {
@@ -35,7 +35,11 @@ const ActionButton = ({business}) => {
 
     const OnPressHandle=(item)=>{
 
-        if(item.name==='Share'){
+        if(item.name==='Share')
+        {
+            Share.share({
+                message:business?.name+"\n Address:"+business?.adres
+            })
             return ;
         }
         Linking.openURL(item.url)

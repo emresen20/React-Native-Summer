@@ -1,10 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '../../constants/Colors'
+import { useRouter } from 'expo-router'
 
 const PopularBusinessItem = ({ business }) => {
+
+  const router=useRouter();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity 
+      onPress={()=> router.push("/businessdetail/"+business.id)}
+      style={styles.container}>
       <Image
         source={{ uri: business?.imageUrl }}
         style={styles.imagebusiness}
@@ -34,7 +40,7 @@ const PopularBusinessItem = ({ business }) => {
       </View>
 
 
-    </View>
+    </TouchableOpacity>
   )
 }
 

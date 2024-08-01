@@ -20,7 +20,7 @@ const PopulerBusiness = () => {
 
         querySnapshot.forEach((doc) => {
             console.log("getbusineslist", doc.data())
-            setBusinessList(prev => [...prev, doc.data()])
+            setBusinessList(prev => [...prev, {id:doc.id,...doc.data()}])
         })
     }
     return (

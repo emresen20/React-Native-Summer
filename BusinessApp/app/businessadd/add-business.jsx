@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { Colors } from '../../constants/Colors';
@@ -50,6 +50,91 @@ const AddBusinesss = () => {
               
             </TouchableOpacity>
 
+                <View>
+                    <TextInput
+                    placeholder='Name'  
+                    placeholderTextColor={Colors.ICON_BG}
+                    style={{
+                        padding:8,
+                        borderWidth:1,
+                        borderRadius:5,
+                        fontSize:17,
+                        backgroundColor:"white",
+                        marginTop:10,
+                        borderColor:Colors.PRIMARY,
+                        fontFamily:"outfit-bold",
+                        color:"red"
+                        
+                    }}  
+                     />
+                     <TextInput
+                    placeholder='Adress'  
+                    placeholderTextColor={Colors.ICON_BG}
+                    style={{
+                        padding:8,
+                        borderWidth:1,
+                        borderRadius:5,
+                        fontSize:17,
+                        backgroundColor:"white",
+                        marginTop:10,
+                        borderColor:Colors.PRIMARY,
+                        fontFamily:"outfit-bold",
+                        color:"red"
+                        
+                    }}  
+                     />
+                     <TextInput
+                    placeholder='Contact'  
+                    placeholderTextColor={Colors.ICON_BG}
+                    style={{
+                        padding:8,
+                        borderWidth:1,
+                        borderRadius:5,
+                        fontSize:17,
+                        backgroundColor:"white",
+                        marginTop:10,
+                        borderColor:Colors.PRIMARY,
+                        fontFamily:"outfit-bold",
+                        color:"red"
+                        
+                    }}  
+                     />
+                        <TextInput
+                    placeholder='Email'  
+                    placeholderTextColor={Colors.ICON_BG}
+                    style={{
+                        padding:8,
+                        borderWidth:1,
+                        borderRadius:5,
+                        fontSize:17,
+                        backgroundColor:"white",
+                        marginTop:10,
+                        borderColor:Colors.PRIMARY,
+                        fontFamily:"outfit-bold",
+                        color:"red"
+                        
+                    }}  
+                     />
+                       <TextInput
+                    placeholder='About'  
+                    multiline
+                    numberOfLines={5}
+                    placeholderTextColor={Colors.ICON_BG}
+                    style={{
+                        padding:8,
+                        borderWidth:1,
+                        borderRadius:5,
+                        fontSize:17,
+                        backgroundColor:"white",
+                        marginTop:10,
+                        borderColor:Colors.PRIMARY,
+                        fontFamily:"outfit-bold",
+                        color:"red",
+                        height:100
+                        
+                    }}  
+                     />
+                </View>
         </View>
     )
 }
@@ -59,14 +144,15 @@ export default AddBusinesss
 const styles = StyleSheet.create({
     textbusiness: {
         fontFamily: "outfit-bold",
-        fontSize: 25
+        fontSize: 25,
+        color:Colors.PRIMARY
     },
     container: {
         padding: 20
     },
     textfill: {
         fontFamily: "outfit",
-        color: Colors.GRAY
+        color: Colors.ICON_BG
     },
     imagecamera: {
         width: 100,

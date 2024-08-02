@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import UserInfo from '../../components/Profile/UserInfo'
 import { Colors } from '../../constants/Colors'
+import MenuList from '../../components/Profile/MenuList'
 
 const profile = () => {
   return (
@@ -14,6 +15,8 @@ const profile = () => {
         <UserInfo/>
 
         {/* MenuList */}
+        
+        <MenuList/>
 
 
     </View>

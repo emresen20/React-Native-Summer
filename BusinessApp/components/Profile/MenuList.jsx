@@ -7,6 +7,10 @@ const MenuList = () => {
 
     const router= useRouter();
 
+    const onMenuClick=(item)=>{
+        router.push(item.path)
+    }
+
     const menuList = [
         {
             id: 1,
@@ -34,6 +38,7 @@ const MenuList = () => {
         }
     ]
 
+
     return (
         <View style={{ marginTop: 40 }}>
             <FlatList
@@ -41,7 +46,7 @@ const MenuList = () => {
                 data={menuList}
                 renderItem={({ item, index }) => (
                     <TouchableOpacity
-                        onPress={()=> router.push(item.path)}
+                        onPress={()=> onMenuClick(item) }
                         key={index}
                         style={styles.businessView}>
                         <Image

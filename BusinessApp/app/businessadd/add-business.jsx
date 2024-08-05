@@ -5,7 +5,8 @@ import { Colors } from '../../constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../config/FirebaseConfig';
+import { db, storage } from '../../config/FirebaseConfig';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const AddBusinesss = () => {
 
@@ -57,8 +58,20 @@ const AddBusinesss = () => {
         console.log("result", result)
     }
 
-    const onAddNewBusiness=()=>{
-        con
+    const onAddNewBusiness=async()=>{
+        const fileName=Date.now().toString()+".jpg";
+        const resp= await fetch(imageUri);
+        const blob= await resp.blob();
+
+        const imageRef=ref(storage,"business/"+fileName);
+
+        uploadBytes(imageRef,blob).then((snapShot)=>{
+            console.log("File Uploated...")
+        }).then(resp=>{
+            getDownloadURL(imageRef).then(async(dowlandUrl)=>{
+                console.log(dowlandUrl)
+            })
+        })
     }
 
 
@@ -184,7 +197,11 @@ const AddBusinesss = () => {
                     items={categoryList}
                 />
             </View>
-            <TouchableOpacity style={styles.buttonstyle}>
+            <TouchableOpacity
+            
+            onPress={()=> onAddNewBusiness()}
+            
+            style={styles.buttonstyle}>
                 <Text style={{
                     textAlign:"center",
                     fontFamily:"outfit-medium",

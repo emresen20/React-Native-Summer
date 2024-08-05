@@ -22,7 +22,7 @@ const MenuList = () => {
             id: 2,
             name: "My Business",
             icon: require("../../assets/images/business.png"),
-            path: ''
+            path: '/businessadd/my-business'
         },
         {
             id: 3,

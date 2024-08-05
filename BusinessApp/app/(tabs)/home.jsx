@@ -1,24 +1,26 @@
-import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, ScrollView, RefreshControl } from 'react-native'
+import React, { useState } from 'react'
 import Header from '../../components/Home/Header'
 import Slider from '../../components/Home/Slider'
 import Category from '../../components/Home/Category'
 import PopulerBusiness from '../../components/Home/PopulerBusiness'
 
 const home = () => {
+
+
   return (
     <ScrollView>
       {/* {HEAder} */}
 
-      <Header/>
+      <Header />
       {/* {Slider} */}
-      <Slider/>
+      <Slider />
       {/* {CAtegory} */}
-      <Category/>
+      <Category />
       {/* {Popular Business List} */}
-      <PopulerBusiness/>
+      <PopulerBusiness />
 
-      <View style={{height:20}}>
+      <View style={{ height: 20 }}>
 
       </View>
     </ScrollView>

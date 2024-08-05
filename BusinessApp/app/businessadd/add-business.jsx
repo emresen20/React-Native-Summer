@@ -1,28 +1,30 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ToastAndroid, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { Colors } from '../../constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import RNPickerSelect from 'react-native-picker-select';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db, storage } from '../../config/FirebaseConfig';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useUser } from '@clerk/clerk-expo';
 
 const AddBusinesss = () => {
 
     const navigation = useNavigation();
 
 
-    
 
+    const { user } = useUser();
     const [imageUri, setImageUri] = useState(null);
-    const [categoryList,setCategoryList]=useState([])
-    const [name,setName]=useState();
-    const [adress,setAdress]=useState();
-    const [contact,setContact]=useState();
-    const [website,setWebsite]=useState();
-    const [about,setAbout]=useState();
-    const [category,setCategory]=useState()
+    const [categoryList, setCategoryList] = useState([])
+    const [name, setName] = useState();
+    const [adress, setAdress] = useState();
+    const [contact, setContact] = useState();
+    const [website, setWebsite] = useState();
+    const [about, setAbout] = useState();
+    const [category, setCategory] = useState()
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -31,18 +33,18 @@ const AddBusinesss = () => {
             headerShown: true
         })
         GetCategoryList();
-    },[])
+    }, [])
 
-    const GetCategoryList=async()=>{
+    const GetCategoryList = async () => {
         setCategoryList([])
-        const q=query(collection(db,"Category"));
-        const snapShot=await getDocs(q);
+        const q = query(collection(db, "Category"));
+        const snapShot = await getDocs(q);
 
-        snapShot.forEach((doc)=>{
-            console.log("categoriler",doc.data());
-            setCategoryList(prev=>[...prev,{
-                label:(doc.data()).name,
-                value:(doc.data()).name
+        snapShot.forEach((doc) => {
+            console.log("categoriler", doc.data());
+            setCategoryList(prev => [...prev, {
+                label: (doc.data()).name,
+                value: (doc.data()).name
             }])
         })
     }
@@ -58,25 +60,53 @@ const AddBusinesss = () => {
         console.log("result", result)
     }
 
-    const onAddNewBusiness=async()=>{
-        const fileName=Date.now().toString()+".jpg";
-        const resp= await fetch(imageUri);
-        const blob= await resp.blob();
+    const onAddNewBusiness = async () => {
+        setLoading(true);
+    
+        try {
+            const fileName = Date.now().toString() + ".jpg";
+            const resp = await fetch(imageUri);
+            const blob = await resp.blob();
+    
+            const imageRef = ref(storage, "business/" + fileName);
+            
+            await uploadBytes(imageRef, blob);
+            console.log("File Uploaded...");
+    
+            const downloadUrl = await getDownloadURL(imageRef);
+            console.log(downloadUrl);
+            await saveBusinessDetail(downloadUrl);
+            
+            ToastAndroid.show("New Business Added", ToastAndroid.LONG);
+        } catch (error) {
+            console.log("Error uploading file or saving business details:", error);
+            ToastAndroid.show("Failed to add business", ToastAndroid.LONG);
+        } finally {
+            setLoading(false);
+        }
+    }
+    
 
-        const imageRef=ref(storage,"business/"+fileName);
-
-        uploadBytes(imageRef,blob).then((snapShot)=>{
-            console.log("File Uploated...")
-        }).then(resp=>{
-            getDownloadURL(imageRef).then(async(dowlandUrl)=>{
-                console.log(dowlandUrl)
-            })
+    const saveBusinessDetail = async (imageurl) => {
+        await setDoc(doc(db, "BusinessList", Date.now().toString()), {
+            name: name,
+            adress: adress,
+            contact: contact,
+            website: website,
+            category: category,
+            about: about,
+            username: user?.fullName,
+            userEmail: user?.primaryEmailAddress?.emailAddress,
+            userImage: user?.imageUrl,
+            imageUrl: imageurl
         })
+        setLoading(false)
+        ToastAndroid.show("new Business",ToastAndroid.LONG)
+
     }
 
 
 
-   
     return (
         <View style={styles.container}>
             <Text style={styles.textbusiness}>Add New Businesss</Text>
@@ -102,7 +132,7 @@ const AddBusinesss = () => {
             <View>
                 <TextInput
                     placeholder='Name'
-                    onChangeText={(v)=>setName(v)}
+                    onChangeText={(v) => setName(v)}
                     placeholderTextColor={Colors.ICON_BG}
                     style={{
                         padding: 8,
@@ -119,7 +149,7 @@ const AddBusinesss = () => {
                 />
                 <TextInput
                     placeholder='Adress'
-                    onChangeText={(v)=>setAdress(v)}
+                    onChangeText={(v) => setAdress(v)}
                     placeholderTextColor={Colors.ICON_BG}
                     style={{
                         padding: 8,
@@ -136,7 +166,7 @@ const AddBusinesss = () => {
                 />
                 <TextInput
                     placeholder='Contact'
-                    onChangeText={(v)=>setContact(v)}
+                    onChangeText={(v) => setContact(v)}
                     placeholderTextColor={Colors.ICON_BG}
                     style={{
                         padding: 8,
@@ -153,7 +183,7 @@ const AddBusinesss = () => {
                 />
                 <TextInput
                     placeholder='Website'
-                    onChangeText={(v)=>setWebsite(v)}
+                    onChangeText={(v) => setWebsite(v)}
                     placeholderTextColor={Colors.ICON_BG}
                     style={{
                         padding: 8,
@@ -170,7 +200,7 @@ const AddBusinesss = () => {
                 />
                 <TextInput
                     placeholder='About'
-                    onChangeText={(v)=>setAbout(v)}
+                    onChangeText={(v) => setAbout(v)}
                     multiline
                     numberOfLines={5}
                     placeholderTextColor={Colors.ICON_BG}
@@ -198,17 +228,22 @@ const AddBusinesss = () => {
                 />
             </View>
             <TouchableOpacity
-            
-            onPress={()=> onAddNewBusiness()}
-            
-            style={styles.buttonstyle}>
-                <Text style={{
-                    textAlign:"center",
-                    fontFamily:"outfit-medium",
-                    color:"white"
-                }}>
-                    Add New Business
-                </Text>
+
+                onPress={() => onAddNewBusiness()}
+                disabled={loading}    
+                style={styles.buttonstyle}>
+
+                {loading ?
+                    <ActivityIndicator size={'large'} color={"white"}/> :
+                    <Text style={{
+                        textAlign: "center",
+                        fontFamily: "outfit-medium",
+                        color: "white"
+                    }}>
+                        Add New Business
+                    </Text>
+                }
+
             </TouchableOpacity>
         </View>
     )
@@ -238,29 +273,29 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 15
     },
-    imagePickerView:{
-        marginTop:10,
-        borderWidth:1,
-        backgroundColor:"white",
-        borderColor:Colors.PRIMARY
+    imagePickerView: {
+        marginTop: 10,
+        borderWidth: 1,
+        backgroundColor: "white",
+        borderColor: Colors.PRIMARY
     },
-    rnpickerstyle:{
-        fontFamily:"outfit-bold",
-        inputAndroid:{
-            color:Colors.ICON_BG,
-            fontFamily:"outfit-bold"
-            
+    rnpickerstyle: {
+        fontFamily: "outfit-bold",
+        inputAndroid: {
+            color: Colors.ICON_BG,
+            fontFamily: "outfit-bold"
+
         },
-        inputIOS:{
-            color:Colors.ICON_BG,
+        inputIOS: {
+            color: Colors.ICON_BG,
             fontFamily: 'outfit-bold'
         }
     },
-    buttonstyle:{
-        padding:13,
-        backgroundColor:Colors.PRIMARY,
-        borderRadius:5,
-        marginTop:20
+    buttonstyle: {
+        padding: 13,
+        backgroundColor: Colors.PRIMARY,
+        borderRadius: 5,
+        marginTop: 20
 
 
     }

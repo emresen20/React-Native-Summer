@@ -57,6 +57,11 @@ const AddBusinesss = () => {
         console.log("result", result)
     }
 
+    const onAddNewBusiness=()=>{
+        con
+    }
+
+
 
    
     return (

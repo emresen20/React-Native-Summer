@@ -1,13 +1,27 @@
-import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity, Share } from 'react-native'
 import React from 'react'
 import { Colors } from '../../constants/Colors'
 import { useRouter } from 'expo-router'
+import { useAuth } from '@clerk/clerk-expo'
 
 const MenuList = () => {
 
     const router= useRouter();
+    const {signOut}=useAuth();
 
+     
     const onMenuClick=(item)=>{
+        if(item.path=="logout"){
+            signOut();
+            return;
+        }
+        if(item.path=='share'){
+            Share.share({
+                message:"You can Dowload from Google Play"
+            })
+            return;
+        }
+
         router.push(item.path)
     }
 
@@ -28,13 +42,13 @@ const MenuList = () => {
             id: 3,
             name: "Share App",
             icon: require("../../assets/images/share.png"),
-            path: ''
+            path: 'share'
         },
         {
             id: 4,
             name: "Logout",
             icon: require("../../assets/images/logout.png"),
-            path: ''
+            path: 'logout'
         }
     ]
 

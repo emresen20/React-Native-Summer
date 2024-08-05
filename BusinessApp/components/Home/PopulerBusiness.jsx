@@ -18,10 +18,15 @@ const PopulerBusiness = () => {
         const q = query(collection(db, "BusinessList"), limit(10))
         const querySnapshot = await getDocs(q);
 
+        let businesses = [];
         querySnapshot.forEach((doc) => {
             console.log("getbusineslist", doc.data())
-            setBusinessList(prev => [...prev, {id:doc.id,...doc.data()}])
-        })
+            // setBusinessList(prev => [...prev, {id:doc.id,...doc.data()}])
+            businesses.push({ id: doc.id, ...doc.data() })
+        });
+        businesses.sort((a, b) => a.name.localeCompare(b.name));
+
+        setBusinessList(businesses);
     }
     return (
         <View>
@@ -39,7 +44,7 @@ const PopulerBusiness = () => {
                 horizontal={true}
                 data={businessList}
                 renderItem={({ item, index }) => (
-                    <View style={{marginRight:5}}>
+                    <View style={{ marginRight: 5 }}>
                         <PopularBusinessItem
                             business={item}
                             key={index}

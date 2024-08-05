@@ -5,6 +5,8 @@ import { useUser } from '@clerk/clerk-expo';
 import {db} from "../../config/FirebaseConfig"
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import BusinessListCard from "../../components/explore/BusinessListCard"
+import { useNavigation } from 'expo-router';
+import { Colors } from '../../constants/Colors';
 
 const MyBusiness = () => {
 
@@ -12,8 +14,16 @@ const MyBusiness = () => {
 
     const [businessList,setBusinessList]= useState([])
     const [loading,setLoading]=useState(false);
+    const navigation=useNavigation();
 
     useEffect(()=>{
+        navigation.setOptions({
+            headerShown:true,
+            headerTitle:"My Business",
+            headerStyle:{
+                backgroundColor:Colors.PRIMARY
+            }
+        })
         user && GetUserBusiness()
     },[user])
 
@@ -54,7 +64,7 @@ export default MyBusiness
 
 const styles = StyleSheet.create({
     container:{
-        padding:hp("3%")
+        padding:hp("2%")
     },
     mytext:{
         fontFamily:"outfit-bold",

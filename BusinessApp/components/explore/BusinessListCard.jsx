@@ -18,6 +18,7 @@ const BusinessListCard = ({business}) => {
         <Text style={styles.adrestext}>{business?.adres}</Text>
       </View>
     </TouchableOpacity>
+    
   )
 }
 

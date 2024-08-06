@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFe
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector,useDispatch } from 'react-redux';
-import { setEmail,setIsLoading,setPassword } from '../redux/userSlice';
+import { setEmail,setIsLoading,setPassword,setLogin } from '../redux/userSlice';
 
 const LoginScreen = () => {
   const navigation= useNavigation();
@@ -36,7 +36,7 @@ const LoginScreen = () => {
           secureTextEntry
         />
         <TouchableOpacity 
-        onPress={()=>dispatch(setIsLoading(true))}
+        onPress={()=>dispatch(setLogin())}
         style={styles.loginButton}>
           {isLoading?
           <ActivityIndicator size={'large'}/>:

@@ -3,7 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState={
     email:null,
     password:null,
-    isLoading:false
+    isLoading:false,
+    isAuth:false,
+    users:{
+        userEmail:"emreium@gmail.com",
+        userPassword:"123456789"
+    }
 }
 
 export const userSlice=createSlice({
@@ -23,9 +28,22 @@ export const userSlice=createSlice({
         },
         setIsLoading:(state,action)=>{
             state.isLoading=action.payload
+        },
+        setIsAuth:(state,action)=>{
+            state.isAuth=action.payload
+        },
+        setLogin:(state,action)=>{
+            if((state.email===state.users.userEmail) && (state.password===state.users.userPassword)){
+                state.isLoading=true
+                state.isAuth=true
+            }else{
+                console.warn("giriş başarısız")
+                
+            }
+
         }
     }
 })
 
-export const {setEmail,setPassword,setIsLoading}= userSlice.actions;  //fonksiyonların dışarı aktarımı
+export const {setEmail,setPassword,setIsLoading,setIsAuth,setLogin}= userSlice.actions;  //fonksiyonların dışarı aktarımı
 export default userSlice.reducer; // bu exportlar sabit yazılmalı

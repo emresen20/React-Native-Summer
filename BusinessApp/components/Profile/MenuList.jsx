@@ -6,18 +6,19 @@ import { useAuth } from '@clerk/clerk-expo'
 
 const MenuList = () => {
 
-    const router= useRouter();
-    const {signOut}=useAuth();
+    const router = useRouter();
+    const { signOut } = useAuth();
 
-     
-    const onMenuClick=(item)=>{
-        if(item.path=="logout"){
+
+    const onMenuClick = (item) => {
+        if (item.path == "logout") {
             signOut();
             return;
         }
-        if(item.path=='share'){
+        if (item.path == 'share') {
             Share.share({
-                message:"You can Dowload from Google Play"
+                  message: "You can Download the APK here: https://drive.google.com/file/d/1jcg6qZu4IDW0kmrn0uLxwz3nfVZ0XijD/view?usp=drive_link"
+                
             })
             return;
         }
@@ -60,7 +61,7 @@ const MenuList = () => {
                 data={menuList}
                 renderItem={({ item, index }) => (
                     <TouchableOpacity
-                        onPress={()=> onMenuClick(item) }
+                        onPress={() => onMenuClick(item)}
                         key={index}
                         style={styles.businessView}>
                         <Image

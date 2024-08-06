@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const navigation= useNavigation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -21,7 +23,9 @@ const LoginScreen = () => {
         <TouchableOpacity style={styles.loginButton}>
           <Text style={styles.loginButtonText}>Giriş Yap</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.signupButton}>
+        <TouchableOpacity 
+          onPress={()=> navigation.navigate("SignUpScreen")}
+          style={styles.signupButton}>
           <Text style={styles.signupButtonText}>Kayıt Ol</Text>
         </TouchableOpacity>
       </View>

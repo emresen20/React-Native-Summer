@@ -1,9 +1,22 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector,useDispatch } from 'react-redux';
+import { setEmail,setIsLoading,setPassword } from '../redux/userSlice';
 
 const LoginScreen = () => {
   const navigation= useNavigation();
+
+  // userSlice içerisindeki verilerin okunmaası
+  const {email,password,isLoading}= useSelector((state)=>state.user)
+  console.log("email",email)
+  console.log("password",password)
+  console.log("isloading",isLoading,)
+
+  //user slice içerisindeki reducer yapılarını kullanma veya veri gönderme
+  const dispatch= useDispatch();
+
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -13,15 +26,23 @@ const LoginScreen = () => {
           placeholder="Email" 
           placeholderTextColor="#aaa"
           keyboardType="email-address"
+          onChangeText={(text)=> dispatch(setEmail(text))}
         />
         <TextInput 
           style={styles.input} 
           placeholder="Şifre" 
+          onChangeText={(password)=> dispatch(setPassword(password))}
           placeholderTextColor="#aaa"
           secureTextEntry
         />
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity 
+        onPress={()=>dispatch(setIsLoading(true))}
+        style={styles.loginButton}>
+          {isLoading?
+          <ActivityIndicator size={'large'}/>:
           <Text style={styles.loginButtonText}>Giriş Yap</Text>
+        }
+          
         </TouchableOpacity>
         <TouchableOpacity 
           onPress={()=> navigation.navigate("SignUpScreen")}

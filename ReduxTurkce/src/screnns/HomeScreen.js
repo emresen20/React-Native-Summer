@@ -1,12 +1,19 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
 const HomeScreen = () => {
 
   const [data, setData] = useState([])
-  console.log("data", data)
+  const [isSaved,setISSaved]=useState(false)
+  const [updateThedata,setUpdateThedata]=useState('')
+
+  console.log(data)
+
+  useEffect(()=>{
+    getData();
+  },[isSaved])
   // datayı firebaseye yollama
   const sendData = async () => {
     try {
@@ -24,30 +31,53 @@ const HomeScreen = () => {
   // datayı firebaseden çekme
 
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "reactnativelesson"));
-    querySnapshot.forEach((doc) => {
-      //console.log(`${doc.id} => ${doc.data()}`);
-      setData([...data, doc.data()]) // daha önceki veriler dursun bir öncekini sonuna ekle
-    });
+
+    const allData=[]
+
+    try{
+      const querySnapshot = await getDocs(collection(db, "reactnativelesson"));
+      querySnapshot.forEach((doc) => {
+        //console.log(`${doc.id} => ${doc.data()}`);
+        //setData([...data, doc.data()]) // daha önceki veriler dursun bir öncekini sonuna ekle
+        //allData.push(doc.data()) // bu da şirketlerde yapılan şık çözüm
+        allData.push({...doc.data(), id:doc.id}) // idiyi dahil edip spesefik işlem yapmak
+      });
+      setData(allData)
+
+    }catch(error){
+      console.log(error)
+
+    }
+   
   }
 
   //datayı silme
 
-  const deleteDAta = async () => {
-    await deleteDoc(doc(db, "reactnativelesson", "customDocId"))
+  const deleteDAta = async (item) => {
+    try{
+      await deleteDoc(doc(db, "reactnativelesson", item))
+      console.log("silindi başarılı")
+      setISSaved(!isSaved)
+
+    }catch(error){
+      console.log(error)
+    }
+    
   }
 
   // update yapma
 
-  const updateData = async () => {
+  const updateData = async (item) => {
     try {
-      const lessonData = doc(db, "reactnativelesson", "aMvMqLFs1gupKYju9MfZ");
+      const lessonData = doc(db, "reactnativelesson",item);
 
       await updateDoc(lessonData, {
-        lesson: 9310
+        content: updateThedata
       },
-    console.log("güncenlendi")
+  
     );
+    console.log("güncenlendi")
+    setISSaved(!isSaved)
     } catch (error) {
       console.log(error)
     }
@@ -74,20 +104,44 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={{
       flex: 1, justifyContent: "center", alignItems: "center",
-      backgroundColor: "red"
+      backgroundColor: "white"
     }}>
-      <TouchableOpacity onPress={() => sendData()}>
-        <Text>Yolla</Text>
+    <TextInput
+      value={updateThedata}
+      onChangeText={setUpdateThedata}
+      placeholder='enter your data'
+      style={{
+        borderWidth:1,
+        width:'50%',
+        paddingVertical:10,
+        marginBottom:10
+      }}
+      />
+    <View style={{marginBottom:50}}>
+    {data.map((item, index) => (
+        <TouchableOpacity key={index} 
+        //onPress={() => deleteDAta(item.id)}
+        onPress={()=> updateData(item.id)}
+        >
+          <Text >{item?.content}</Text>
+          <Text>{item?.id}</Text>
+        </TouchableOpacity>
+        
+      ))}
+    </View>
+   
+    
+     
+      <TouchableOpacity onPress={() => {sendData(),setISSaved(!isSaved)}}>
+        <Text>save</Text>
       </TouchableOpacity >
 
-      <TouchableOpacity style={{ marginTop: 200 }} onPress={() => getData()}>
+      <TouchableOpacity style={{ marginTop: 100 }} onPress={() => getData()}>
         <Text>çek</Text>
       </TouchableOpacity>
 
-      {data.map((item, index) => (
-        <Text key={index}>{item?.content}</Text>
-      ))}
-      <TouchableOpacity style={{ marginTop: 200 }} onPress={() => deleteDAta()}>
+      
+      <TouchableOpacity style={{ marginTop: 100 }} onPress={() => deleteDAta()}>
         <Text>Delete data</Text>
         <TouchableOpacity style={{ marginTop: 100 }} onPress={() => updateData()}>
         <Text>updateData</Text>

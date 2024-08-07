@@ -1,20 +1,26 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector,useDispatch } from 'react-redux';
-import { setEmail,setIsLoading,setPassword,setLogin } from '../redux/userSlice';
+import { setIsLoading } from '../redux/userSlice';
+import { login } from '../redux/userSlice'; // bunu userlicede biz yazmıştık import ettik
 
 const LoginScreen = () => {
   const navigation= useNavigation();
 
   // userSlice içerisindeki verilerin okunmaası
-  const {email,password,isLoading}= useSelector((state)=>state.user)
-  console.log("email",email)
-  console.log("password",password)
-  console.log("isloading",isLoading,)
+  const {isLoading,user,error}= useSelector((state)=>state.user)
+  
+
 
   //user slice içerisindeki reducer yapılarını kullanma veya veri gönderme
   const dispatch= useDispatch();
+
+  const [email,setEmail]=useState("")
+  console.log(email)
+  const [password,setPassword]=useState("")
+
+  
 
 
   return (
@@ -26,17 +32,17 @@ const LoginScreen = () => {
           placeholder="Email" 
           placeholderTextColor="#aaa"
           keyboardType="email-address"
-          onChangeText={(text)=> dispatch(setEmail(text))}
+          onChangeText={(text)=> setEmail(text)}
         />
         <TextInput 
           style={styles.input} 
           placeholder="Şifre" 
-          onChangeText={(password)=> dispatch(setPassword(password))}
+          onChangeText={(password)=> setPassword(password)}
           placeholderTextColor="#aaa"
           secureTextEntry
         />
         <TouchableOpacity 
-        onPress={()=>dispatch(setLogin())}
+        onPress={()=>dispatch(login({email,password}))}
         style={styles.loginButton}>
           {isLoading?
           <ActivityIndicator size={'large'}/>:

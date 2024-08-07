@@ -1,14 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import {getAuth,signInWithEmailAndPassword} from 'firebase/auth';
+
+export const login=createAsyncThunk('user/login',async({email,password})=>{ //cevap beklediğimiz verilerde bunu kullanıyoruz zaman gerektiren olaylarda
+    
+    try{
+        const auth= getAuth();
+        const userCredential= await signInWithEmailAndPassword(auth,email,password)
+        const user = userCredential.user;
+        const token= user.stsTokenManager.accesToken;
+
+        const userData={
+            token,
+            user:user
+        }
+        return userData
+    }catch(error){
+        console.log("userSlice 17 line",error)
+        throw error
+
+    }
+})
+
 
 const initialState={
     email:null,
     password:null,
     isLoading:false,
     isAuth:false,
-    users:{
-        userEmail:"emreium@gmail.com",
-        userPassword:"123456789"
-    }
+    token:null,
+    user:null,
+    error:null,
+   
 }
 
 export const userSlice=createSlice({
@@ -32,18 +54,26 @@ export const userSlice=createSlice({
         setIsAuth:(state,action)=>{
             state.isAuth=action.payload
         },
-        setLogin:(state,action)=>{
-            if((state.email===state.users.userEmail) && (state.password===state.users.userPassword)){
-                state.isLoading=true
-                state.isAuth=true
-            }else{
-                console.warn("giriş başarısız")
-                
-            }
-
-        }
+    },
+    extraReducers:(builder)=>{ // cevap beklediğimiz verilerde bunu kullanıyoruz yükleniyor
+        builder
+        .addCase(login.pending,(state)=>{
+            state.isLoading= true;
+            state.isAuth=false
+        }) //logini dinliyoruz asynthubk için 3 yapı kurulur başarıyla sonuçlandı
+        .addCase(login.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.isAuth=true;
+            state.user=action.payload.user;
+            state.token=action.payload.token //başarılıda payload
+        }) //başarı ile sonuçlandı sonrasında neler yapılacak
+        .addCase(login.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.isAuth=false;
+            state.error=action.error.message; //başarısızda error döndü
+        }) // başarısız oldu
     }
 })
 
-export const {setEmail,setPassword,setIsLoading,setIsAuth,setLogin}= userSlice.actions;  //fonksiyonların dışarı aktarımı
+export const {setEmail,setPassword,setIsLoading,setIsAuth}= userSlice.actions;  //fonksiyonların dışarı aktarımı
 export default userSlice.reducer; // bu exportlar sabit yazılmalı

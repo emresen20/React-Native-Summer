@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useSelector,useDispatch } from 'react-redux';
 
 const HomeScreen = () => {
+  const {isLoading,user}= useSelector((state)=>state.user)
+  console.log(user)
   return (
-    <View style={{flex:1,
+    <SafeAreaView style={{flex:1,justifyContent:"center",alignItems:"center",
       backgroundColor:"red"
     }}>
       <Text>HomeScreenss</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

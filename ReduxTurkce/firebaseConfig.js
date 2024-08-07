@@ -1,11 +1,9 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth'; //bunlar zorunluluk
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage'; // asyn storage packetini indirmemiz gerek
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDVDET59Izt35cZicgpRFvB4AUOva_FdO4",
   authDomain: "reduxturkce.firebaseapp.com",
@@ -20,5 +18,6 @@ const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage)
   }); // bunu ekledik
+ export  const db = getFirestore(app);
 
 export default app;

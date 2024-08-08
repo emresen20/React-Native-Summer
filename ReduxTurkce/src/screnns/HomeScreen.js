@@ -105,7 +105,7 @@ const HomeScreen = () => {
     <ScrollView style={{
       flex: 1,
     }}>
-      <View style={{alignItems:"center",justifyContent:"center",marginTop:25}}>
+      <View style={{ alignItems: "center", justifyContent: "center", marginTop: 25 }}>
         <TextInput
           value={updateThedata}
           onChangeText={setUpdateThedata}
@@ -119,34 +119,52 @@ const HomeScreen = () => {
         />
         <View style={{ marginBottom: 50 }}>
           {data.map((item, index) => (
-            <TouchableOpacity key={index}
+            <View key={index}
+
+              style={{ padding: 50, backgroundColor: "green", marginTop: 5, flexDirection: "row", gap: 10 }}
               //onPress={() => deleteDAta(item.id)}
-              onPress={() => updateData(item.id)}
+              
             >
-              <Text >{item?.content}</Text>
-              <Text>{item?.id}</Text>
-            </TouchableOpacity>
+              <View>
+                <Text >{item?.content}</Text>
+                <Text>{item?.id}</Text>
+              </View>
+              <View>
+                <TouchableOpacity onPress={() => deleteDAta(item.id)} >
+                  <Text style={{ marginBottom: 10 }}>sil</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => updateData(item.id)}>
+                  <Text style={{ marginBottom: 10 }}>düzenle</Text>
+                </TouchableOpacity>
+
+              </View>
+
+            </View>
 
           ))}
         </View>
 
 
 
-        <TouchableOpacity onPress={() => { sendData(), setISSaved(!isSaved) }}>
-          <Text>save</Text>
+        <TouchableOpacity
+          style={{ padding: 10, backgroundColor: "blue" }}
+          onPress={() => { sendData(), setISSaved(!isSaved) }}>
+          <Text style={{ color: "white" }}>save</Text>
         </TouchableOpacity >
 
-        <TouchableOpacity style={{ marginTop: 100 }} onPress={() => getData()}>
-          <Text>çek</Text>
+        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => getData()}>
+          <Text style={{ color: "white" }}>çek</Text>
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={{ marginTop: 100 }} onPress={() => deleteDAta()}>
-          <Text>Delete data</Text>
-          <TouchableOpacity style={{ marginTop: 100 }} onPress={() => updateData()}>
-            <Text>updateData</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => deleteDAta()}>
+          <Text style={{ color: "white" }}>Delete data</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => updateData()}>
+          <Text style={{ color: "white" }}>updateData</Text>
+        </TouchableOpacity>
+
       </View>
 
     </ScrollView>

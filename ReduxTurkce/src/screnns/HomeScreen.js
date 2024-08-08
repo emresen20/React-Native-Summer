@@ -3,11 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
+
+import { logout } from '../redux/userSlice';
+
 const HomeScreen = () => {
 
   const [data, setData] = useState([])
   const [isSaved, setISSaved] = useState(false)
   const [updateThedata, setUpdateThedata] = useState('')
+
+  const dispatch=useDispatch()
 
   console.log(data)
 
@@ -84,6 +89,12 @@ const HomeScreen = () => {
 
   }
 
+  // kullanıı çıkış işlemleri
+
+  const handleLogout=async()=>{
+    dispatch(logout())
+  }
+
 
 
   // const updateDoc = async () => {
@@ -115,16 +126,16 @@ const HomeScreen = () => {
             width: '50%',
             paddingVertical: 10,
             marginBottom: 10,
-            textAlign:"center"
+            textAlign: "center"
           }}
         />
         <View style={{ marginBottom: 50 }}>
           {data.map((item, index) => (
             <View key={index}
 
-              style={{ padding: 50, backgroundColor: "green", marginTop: 5, flexDirection: "row", gap: 10 }}
-              //onPress={() => deleteDAta(item.id)}
-              
+              style={{ padding: 50, backgroundColor: "green", marginTop: 5, flexDirection: "row", gap: 10, borderRadius: 10 }}
+            //onPress={() => deleteDAta(item.id)}
+
             >
               <View>
                 <Text >{item?.content}</Text>
@@ -157,6 +168,9 @@ const HomeScreen = () => {
           <Text style={{ color: "white" }}>çek</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity style={{ padding: 20, backgroundColor: "red", marginTop: 10 }} onPress={() => handleLogout()}>
+          <Text style={{ color: "white" }}>Çıkış</Text>
+        </TouchableOpacity>
 
 
       </View>

@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity,TouchableWithoutFeedback,Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/userSlice';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -8,47 +10,57 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
+  const dispatch = useDispatch();
+
+  const { isLoading } = useSelector((state)=>state.user)
+
+  const handleRegister = () => {
+    dispatch(register({ email, password }))
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-     <View style={styles.container}>
-      <Text style={styles.title}>Kayıt Ol</Text>
-      <TextInput 
-        style={styles.input} 
-        placeholder="Ad Soyad" 
-        placeholderTextColor="#aaa"
-        value={name}
-        onChangeText={(a)=>setName(a)}
+      <View style={styles.container}>
+        <Text style={styles.title}>Kayıt Ol</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ad Soyad"
+          placeholderTextColor="#aaa"
+          value={name}
+          onChangeText={(a) => setName(a)}
 
-      />
-      <TextInput 
-        style={styles.input} 
-        placeholder="Email" 
-        placeholderTextColor="#aaa"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={(a)=>setEmail(a)}
-      />
-      <TextInput 
-        style={styles.input} 
-        placeholder="Şifre" 
-        placeholderTextColor="#aaa"
-        secureTextEntry
-        value={password}
-        onChangeText={(a)=>setPassword(a)}
-      />
-      <TouchableOpacity 
-      onPress={()=>console.log(email,name,password)}
-      style={styles.signupButton}>
-        <Text style={styles.signupButtonText}>Kayıt Ol</Text>
-      </TouchableOpacity>
-      <TouchableOpacity 
-      onPress={()=> navigation.navigate("LoginScreen")}
-      style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>Zaten hesabın var mı? Giriş Yap</Text>
-      </TouchableOpacity>
-    </View>
-     </TouchableWithoutFeedback >
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#aaa"
+          keyboardType="email-address"
+          value={email}
+          onChangeText={(a) => setEmail(a)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Şifre"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          value={password}
+          onChangeText={(a) => setPassword(a)}
+        />
+        <TouchableOpacity
+          onPress={() => handleRegister()}
+          style={styles.signupButton}>
+          {isLoading ?
+            <ActivityIndicator size={'large'} />
+            : <Text style={styles.signupButtonText}>Kayıt Ol</Text>}
+
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LoginScreen")}
+          style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>Zaten hesabın var mı? Giriş Yap</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback >
   );
 };
 

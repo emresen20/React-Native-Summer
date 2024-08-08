@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsLoading } from '../redux/userSlice';
-import { login } from '../redux/userSlice'; // bunu userlicede biz yazmıştık import ettik
+import { login ,autologin} from '../redux/userSlice'; // bunu userlicede biz yazmıştık import ettik
 
 const LoginScreen = () => {
   const navigation= useNavigation();
@@ -19,6 +19,12 @@ const LoginScreen = () => {
   const [email,setEmail]=useState("")
   console.log(email)
   const [password,setPassword]=useState("")
+
+  //Kullanıcı daha önce giriş yaptıysa kontrol et ve giriş yap
+
+   useEffect(()=>{
+     dispatch(autologin())
+   },[])
 
   
 

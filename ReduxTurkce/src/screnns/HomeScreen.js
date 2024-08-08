@@ -114,7 +114,8 @@ const HomeScreen = () => {
             borderWidth: 1,
             width: '50%',
             paddingVertical: 10,
-            marginBottom: 10
+            marginBottom: 10,
+            textAlign:"center"
           }}
         />
         <View style={{ marginBottom: 50 }}>
@@ -157,13 +158,6 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => deleteDAta()}>
-          <Text style={{ color: "white" }}>Delete data</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => updateData()}>
-          <Text style={{ color: "white" }}>updateData</Text>
-        </TouchableOpacity>
 
       </View>
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
-
+import Animated,{BounceIn, BounceOut, FlipOutYRight} from 'react-native-reanimated';
 import { logout } from '../redux/userSlice';
 import Itemcard from '../components/Itemcard';
 
@@ -15,6 +15,7 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch()
 
+  //const AnimatedTouch=Animated.createAnimatedComponent(TouchableOpacity) eğer kullanılmaayam component varsa böyle kullan
   console.log(data)
 
   useEffect(() => {
@@ -130,17 +131,18 @@ const HomeScreen = () => {
             textAlign: "center"
           }}
         />
-        <View style={{height:"85%"}}>
+       
           <FlatList
+            style={{height:'80%'}}
             data={data}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <Itemcard item={item} deleteDAta={deleteDAta} updateData={updateData} />
+            renderItem={({ item,index }) => (
+              <Itemcard item={item} deleteDAta={deleteDAta} updateData={updateData}  index={index}/>
             )
 
             }
           />
-        </View>
+
 
         {/* <View style={{ marginBottom: 50 }}>
           {data.map((item, index) => (
@@ -170,8 +172,9 @@ const HomeScreen = () => {
         </View> */}
 
 
-        <View style={{ flexDirection: "row", position: "absolute", bottom:-50,gap:5 }}>
+        <View style={{ flexDirection: "row", position: "absolute", bottom:-80,gap:5 }}>
           <TouchableOpacity
+            
             style={{ padding: 10, backgroundColor: "blue" }}
             onPress={() => { sendData(), setISSaved(!isSaved) }}>
             <Text style={{ color: "white" }}>save</Text>

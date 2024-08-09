@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React from 'react'
+import Animated,{BounceIn, BounceOut, FlipOutYRight} from 'react-native-reanimated';
 
-const Itemcard = ({item,deleteDAta,updateData}) => {
+const Itemcard = ({item,deleteDAta,updateData,index}) => {
     return (
-        <View 
-
+        <Animated.View 
+            entering={BounceIn.delay(100*(index+1))}
+            exiting={FlipOutYRight.delay(100)}
             style={{ padding: 40, backgroundColor: "green", marginTop: 5, flexDirection: "row", gap: 10, borderRadius: 10 }}
         //onPress={() => deleteDAta(item.id)}
 
@@ -22,8 +24,9 @@ const Itemcard = ({item,deleteDAta,updateData}) => {
                 </TouchableOpacity>
 
             </View>
+           
 
-        </View>
+        </Animated.View >
     )
 }
 

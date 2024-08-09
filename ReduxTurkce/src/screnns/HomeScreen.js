@@ -1,10 +1,11 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
 
 import { logout } from '../redux/userSlice';
+import Itemcard from '../components/Itemcard';
 
 const HomeScreen = () => {
 
@@ -12,7 +13,7 @@ const HomeScreen = () => {
   const [isSaved, setISSaved] = useState(false)
   const [updateThedata, setUpdateThedata] = useState('')
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
   console.log(data)
 
@@ -91,7 +92,7 @@ const HomeScreen = () => {
 
   // kullanıı çıkış işlemleri
 
-  const handleLogout=async()=>{
+  const handleLogout = async () => {
     dispatch(logout())
   }
 
@@ -113,7 +114,7 @@ const HomeScreen = () => {
 
   const { isLoading, user } = useSelector((state) => state.user)
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
     }}>
       <View style={{ alignItems: "center", justifyContent: "center", marginTop: 25 }}>
@@ -129,7 +130,19 @@ const HomeScreen = () => {
             textAlign: "center"
           }}
         />
-        <View style={{ marginBottom: 50 }}>
+        <View style={{height:"85%"}}>
+          <FlatList
+            data={data}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <Itemcard item={item} deleteDAta={deleteDAta} updateData={updateData} />
+            )
+
+            }
+          />
+        </View>
+
+        {/* <View style={{ marginBottom: 50 }}>
           {data.map((item, index) => (
             <View key={index}
 
@@ -154,28 +167,30 @@ const HomeScreen = () => {
             </View>
 
           ))}
+        </View> */}
+
+
+        <View style={{ flexDirection: "row", position: "absolute", bottom:-50,gap:5 }}>
+          <TouchableOpacity
+            style={{ padding: 10, backgroundColor: "blue" }}
+            onPress={() => { sendData(), setISSaved(!isSaved) }}>
+            <Text style={{ color: "white" }}>save</Text>
+          </TouchableOpacity >
+
+          <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => getData()}>
+            <Text style={{ color: "white" }}>çek</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ padding: 20, backgroundColor: "red", marginTop: 10 }} onPress={() => handleLogout()}>
+            <Text style={{ color: "white" }}>Çıkış</Text>
+          </TouchableOpacity>
         </View>
 
 
 
-        <TouchableOpacity
-          style={{ padding: 10, backgroundColor: "blue" }}
-          onPress={() => { sendData(), setISSaved(!isSaved) }}>
-          <Text style={{ color: "white" }}>save</Text>
-        </TouchableOpacity >
-
-        <TouchableOpacity style={{ padding: 10, backgroundColor: "blue", marginTop: 10 }} onPress={() => getData()}>
-          <Text style={{ color: "white" }}>çek</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ padding: 20, backgroundColor: "red", marginTop: 10 }} onPress={() => handleLogout()}>
-          <Text style={{ color: "white" }}>Çıkış</Text>
-        </TouchableOpacity>
-
-
       </View>
 
-    </ScrollView>
+    </View>
   )
 }
 

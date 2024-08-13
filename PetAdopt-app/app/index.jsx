@@ -5,11 +5,9 @@ export default function Index() {
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this asddasscree.</Text>
+      <Text style={{fontFamily:"outfit-bold"}}>Edit app/index.tsx to edit this asddasscree.</Text>
     </View>
   );
 }

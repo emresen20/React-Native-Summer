@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Header from '../../components/Home/Header'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const Home = () => {
   return (
-    <View>
+    <View style={styles.container}>
       {/* Header */}
-
+        <Header/>
       {/* Slider */}
 
 
@@ -20,4 +22,9 @@ const Home = () => {
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    padding:hp("3%"),
+    marginTop:hp("2.9%")
+  }
+})

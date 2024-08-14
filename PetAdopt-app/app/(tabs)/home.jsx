@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../../components/Home/Header'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Slider from '../../components/Home/Slider';
+import PetListByCategory from '../../components/Home/PetListByCategory';
 
 const Home = () => {
   return (
@@ -12,9 +13,8 @@ const Home = () => {
       {/* Slider */}
         <Slider/>
 
-      {/* Category */}
-
-      {/* Last Of Pets */}
+      {/* Last Of Pets +Category */}
+      <PetListByCategory/>
 
       {/* Add New Pet Option */}
     </View>

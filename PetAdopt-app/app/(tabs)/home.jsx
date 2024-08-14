@@ -4,7 +4,16 @@ import React from 'react'
 const Home = () => {
   return (
     <View>
-      <Text>Home</Text>
+      {/* Header */}
+
+      {/* Slider */}
+
+
+      {/* Category */}
+
+      {/* Last Of Pets */}
+
+      {/* Add New Pet Option */}
     </View>
   )
 }

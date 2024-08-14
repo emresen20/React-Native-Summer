@@ -1,8 +1,47 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Colors from "../../constants/Colors"
+import * as WebBrowser from 'expo-web-browser'
+import { useOAuth } from '@clerk/clerk-expo'
+import * as Linking from 'expo-linking'
+
+
+export const useWarmUpBrowser = () => {
+    React.useEffect(() => {
+        // Warm up the android browser to improve UX
+        // https://docs.expo.dev/guides/authentication/#improving-user-experience
+        void WebBrowser.warmUpAsync()
+        return () => {
+            void WebBrowser.coolDownAsync()
+        }
+    }, [])
+}
+
+WebBrowser.maybeCompleteAuthSession()
+
+
 const LoginScreen = () => {
+    useWarmUpBrowser()
+    const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
+
+    const onPress = useCallback(async () => {
+        try {
+          const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow({
+            redirectUrl: Linking.createURL('/(tabs)/home', { scheme: 'myapp' }),
+          })
+    
+          if (createdSessionId) {
+            
+          } else {
+            // Use signIn or signUp for next steps such as MFA
+          }
+        } catch (err) {
+          console.error('OAuth error', err)
+        }
+      }, [])
+
+
     return (
         <View style={styles.container}>
             <Image
@@ -15,7 +54,9 @@ const LoginScreen = () => {
                 <Text style={styles.infotext}>
                     Let's adopt the pet which you like and make there life happy again
                 </Text>
-                <Pressable style={styles.buttonstarted}>
+                <Pressable 
+                    onPress={onPress}
+                    style={styles.buttonstarted}>
                     <Text style={styles.getStartedtext}>Get Started</Text>
                 </Pressable>
             </View>
@@ -47,20 +88,20 @@ const styles = StyleSheet.create({
         color: Colors.GRAY
     },
     buttonstarted: {
-        padding:hp("2%"),
-        marginTop:hp("10%"),
-        backgroundColor:Colors.PRIMARY,
-        width:"100%",
-        borderRadius:hp("3%")
-        
+        padding: hp("2%"),
+        marginTop: hp("10%"),
+        backgroundColor: Colors.PRIMARY,
+        width: "100%",
+        borderRadius: hp("3%")
+
     },
-    getStartedtext:{
-        textAlign:"center",
-        fontFamily:"outfit-medium",
-        fontSize:hp("2%")
+    getStartedtext: {
+        textAlign: "center",
+        fontFamily: "outfit-medium",
+        fontSize: hp("2%")
     },
-    container:{
-        backgroundColor:"white",
-        height:"100%"
+    container: {
+        backgroundColor: "white",
+        height: "100%"
     }
 })

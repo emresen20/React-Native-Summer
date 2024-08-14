@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Header from '../../components/Home/Header'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Slider from '../../components/Home/Slider';
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
       {/* Header */}
         <Header/>
       {/* Slider */}
-
+        <Slider/>
 
       {/* Category */}
 

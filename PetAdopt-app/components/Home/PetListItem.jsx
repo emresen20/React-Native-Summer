@@ -1,13 +1,19 @@
-import { StyleSheet, Text, View,Image } from 'react-native'
+import { StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
+import { useRouter } from 'expo-router';
 
 const PetListItem = ({pet}) => {
-
+   const router=useRouter();
     console.log(pet)
   return (
-    <View style={styles.contanier}>
+    <TouchableOpacity 
+      onPress={()=>router.push({
+        pathname:"/pet-detail",
+        params:pet
+      })}
+      style={styles.contanier}>
       <Image 
       source={{uri:pet.imageUrl}}
       style={styles.imagestyle}
@@ -18,7 +24,7 @@ const PetListItem = ({pet}) => {
         <Text style={styles.breedtext}>{pet.breed}</Text>
         <Text style={styles.agetext}>{pet.age} YRS</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

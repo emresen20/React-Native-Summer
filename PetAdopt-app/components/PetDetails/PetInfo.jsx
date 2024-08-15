@@ -26,7 +26,7 @@ export default PetInfo
 const styles = StyleSheet.create({
     imageStyle: {
         width: ("100%"),
-        height: hp("41%"),
+        height: hp("38%"),
         objectFit: "cover"
     },
     nameStyle: {

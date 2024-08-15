@@ -8,7 +8,7 @@ import Colors from "../../constants/Colors"
 const Category = ({category}) => {
 
   const [categoryList, setCategoryList] = useState([])
-  const [selectedCategory,setSelectedCategory]=useState("Dogs")
+  const [selectedCategory,setSelectedCategory]=useState("Birds")
 
 
   // take categoryList from db (firebase)

@@ -5,6 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import PetInfo from '../../components/PetDetails/PetInfo';
 import PetSubInfo from '../../components/PetDetails/PetSubInfo';
 import PetAbout from '../../components/PetDetails/PetAbout';
+import PetOwner from '../../components/PetDetails/PetOwner';
 
 const PetDetails = () => {
   const pet = useLocalSearchParams() // coming from pet listiem router 
@@ -25,8 +26,13 @@ const PetDetails = () => {
         {/* Pet Properties */}
         <PetSubInfo pet={pet} />
 
-        {/* About Owner */}
+        {/* About  */}
         <PetAbout pet={pet} />
+        
+        {/* Pet Owner */}
+        <PetOwner pet={pet}/>
+        <View style={{height:hp('8%')}}></View>
+
       </ScrollView>
       {/* Adopt me */}
 

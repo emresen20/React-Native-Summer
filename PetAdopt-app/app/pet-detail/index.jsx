@@ -40,7 +40,7 @@ const PetDetails = () => {
       {/* Adopt me button */}
       <View style={styles.buttomcontainer}>
         <TouchableOpacity style={styles.adoptButton}>
-          <Text style={styles.adopttext}>Adpot Me</Text>
+          <Text style={styles.adopttext}>Adopt Me</Text>
         </TouchableOpacity>
       </View>
 

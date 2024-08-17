@@ -4,7 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Shared from "../../Shared/Shared";
 import { useUser } from '@clerk/clerk-expo';
 
-const MarkFavorite = ({ pet }) => {
+const MarkFavorite = ({ pet,color="black" }) => {
 
     const { user } = useUser();
     const [favList, setFavList] = useState([]);
@@ -39,11 +39,11 @@ const MarkFavorite = ({ pet }) => {
         <View>
             {favList?.includes(pet.id) ? (
                 <Pressable onPress={removeFromFav}>
-                    <AntDesign name="heart" size={24} color="red" />
+                    <AntDesign name="heart" size={30} color="red" />
                 </Pressable>
             ) : (
                 <Pressable onPress={AddToFav}>
-                    <AntDesign name="hearto" size={30} color="black" />
+                    <AntDesign name="hearto" size={30} color={color}/>
                 </Pressable>
             )}
         </View>

@@ -3,6 +3,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import React from 'react'
 import Colors from '../../constants/Colors';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import MarkFavorite from './MarkFavorite';
 
 const PetInfo = ({ pet }) => {
     return (
@@ -15,7 +16,7 @@ const PetInfo = ({ pet }) => {
                     <Text style={styles.nameStyle}>{pet.name}</Text>
                     <Text style={styles.adresText}>{pet?.adress}</Text>
                 </View>
-                <AntDesign name="hearto" size={30} color="black" />
+                <MarkFavorite pet={pet} />
             </View>
         </View>
     )

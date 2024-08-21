@@ -14,7 +14,7 @@ const AddNewPet = () => {
   }, [])
   return (
     <View style={styles.container}>
-      <Text style={styles.addnewText}>Add New Pet for adption</Text>
+      <Text style={styles.addnewText}>Add New Pet For Adption</Text>
       <View style={styles.imageview}>
         <Image
           source={require("../../assets/images/paws.png")}

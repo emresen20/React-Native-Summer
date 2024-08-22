@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
 
 const AddNewPet = () => {
   const navigation = useNavigation();
+
+  const [formData,setFormData]=useState();
 
   useEffect(() => {
     navigation.setOptions({
@@ -14,7 +16,10 @@ const AddNewPet = () => {
   }, [])
 
   const handleInputChange = (fieldName, fieldValue) => {
-    console.log(fieldName, fieldValue)
+    setFormData(prev=>({
+      ...prev,
+      [fieldName]:fieldValue
+    }))
   }
   return (
     <ScrollView style={styles.container}>

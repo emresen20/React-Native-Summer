@@ -12,6 +12,10 @@ const AddNewPet = () => {
       headerTitle: "Add New Pet"
     })
   }, [])
+
+  const handleInputChange=(fieldName,fieldValue)=>{
+    console.log(fieldName,fieldValue)
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.addnewText}>Add New Pet For Adption</Text>
@@ -21,9 +25,11 @@ const AddNewPet = () => {
           style={styles.pawimage}
         />
       </View>
-      <View>
-        <Text>Pet Name*</Text>
-        <TextInput/>
+      <View style={styles.inputcontainer}>
+        <Text style={styles.label}>Pet Name*</Text>
+        <TextInput style={styles.input} onChangeText={
+          (value)=>handleInputChange('name',value)
+          }/>
       </View>
 
     </View>
@@ -55,5 +61,19 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: hp('12%'),
     borderColor: Colors.GRAY
+  },
+  inputcontainer:{
+    marginVertical:hp('1.5%')
+  },
+  input:{
+    padding:hp('1.4%'),
+    backgroundColor:"white",
+    borderRadius:15,
+    fontFamily:"outfit"
+  },
+  label:{
+    marginVertical:hp('0.7%'),
+    fontFamily:"outfit",
+
   }
 })

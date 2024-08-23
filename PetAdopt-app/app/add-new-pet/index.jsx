@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
+import {Picker} from '@react-native-picker/picker';
 
 const AddNewPet = () => {
   const navigation = useNavigation();
 
-  const [formData,setFormData]=useState();
+  const [formData, setFormData] = useState();
+  const [gender,setGender]=useState()
 
   useEffect(() => {
     navigation.setOptions({
@@ -16,9 +18,9 @@ const AddNewPet = () => {
   }, [])
 
   const handleInputChange = (fieldName, fieldValue) => {
-    setFormData(prev=>({
+    setFormData(prev => ({
       ...prev,
-      [fieldName]:fieldValue
+      [fieldName]: fieldValue
     }))
   }
   return (
@@ -52,6 +54,15 @@ const AddNewPet = () => {
         } />
       </View>
 
+      <Picker
+        selectedValue={gender}
+        onValueChange={(itemValue, itemIndex) =>
+          setGender(itemValue)
+        }>
+        <Picker.Item label="Male" value="Male" />
+        <Picker.Item label="Female" value="Female" />
+      </Picker>
+
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Weight *</Text>
         <TextInput style={styles.input} onChangeText={
@@ -68,20 +79,20 @@ const AddNewPet = () => {
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>About *</Text>
-        <TextInput 
-        style={styles.input}
-        numberOfLines={5}
-        multiline={true} 
-        onChangeText={
-          (value) => handleInputChange('about', value)
-        } />
+        <TextInput
+          style={styles.input}
+          numberOfLines={5}
+          multiline={true}
+          onChangeText={
+            (value) => handleInputChange('about', value)
+          } />
       </View>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.sumbitText}>
           Sumbit
         </Text>
       </TouchableOpacity>
-      <View style={{padding:20}}></View>
+      <View style={{ padding: 20 }}></View>
 
     </ScrollView>
   )
@@ -127,16 +138,16 @@ const styles = StyleSheet.create({
     fontFamily: "outfit",
 
   },
-  button:{
-    padding:hp('2%'),
-    backgroundColor:Colors.PRIMARY,
-    borderRadius:15,
-    marginVertical:hp('1%')
+  button: {
+    padding: hp('2%'),
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 15,
+    marginVertical: hp('1%')
   },
-  sumbitText:{
-    fontFamily:"outfit-medium",
-    textAlign:"center",
-    fontSize:hp('2%'),
-    color:"white"
+  sumbitText: {
+    fontFamily: "outfit-medium",
+    textAlign: "center",
+    fontSize: hp('2%'),
+    color: "white"
   }
 })

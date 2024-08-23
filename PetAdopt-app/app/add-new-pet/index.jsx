@@ -1,24 +1,31 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, Pressable, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, Pressable, ToastAndroid, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useNavigation } from 'expo-router'
+import { router, useNavigation, useRouter } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
 import { Picker } from '@react-native-picker/picker';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../config/FirebaseConfig';
+import { collection, doc, getDocs, setDoc, } from 'firebase/firestore';
+import { db, storage } from '../../config/FirebaseConfig';
 import * as ImagePicker from 'expo-image-picker';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useUser } from '@clerk/clerk-expo';
+
 
 const AddNewPet = () => {
   const navigation = useNavigation();
-
   const [formData, setFormData] = useState({
-    category:"Dogs",
-    sex:"Male"
+    category: "Dogs",
+    sex: "Male"
   });
+
+
   const [gender, setGender] = useState()
   const [selectedCategory, setSelectedCategory] = useState()
   const [categoryList, setCategoryList] = useState([])
   const [image, setImage] = useState()
+  const { user } = useUser();
+  const [loader, setLoader] = useState(false)
+  const router=useRouter();
 
   useEffect(() => {
     navigation.setOptions({
@@ -52,10 +59,13 @@ const AddNewPet = () => {
 
   const onSumbit = () => {
     // object keys arrayin ana başlıklarını döndürür length ile kaç tane olduğunu döndürür.
-   if(Object.keys(formData).length!=8){
-    ToastAndroid.show("Please Enter All Details",ToastAndroid.BOTTOM)
-    return null;
-   }
+    if (Object.keys(formData).length != 8) {
+      ToastAndroid.show("Please Enter All Details", ToastAndroid.BOTTOM)
+      return null;
+    }
+    setLoader(true)
+    UploadImage();
+
   }
 
   // used to image picker from gallery
@@ -75,12 +85,46 @@ const AddNewPet = () => {
       setImage(result.assets[0].uri);
     }
   };
+
+  // use to upload pet ımage to firebase storage (to server)
+  const UploadImage = async () => {
+    const resp = await fetch(image);
+    const blobImage = await resp.blob();
+    const storageRef = ref(storage, '/PetAdopt/' + Date.now() + '.jpg')
+
+    uploadBytes(storageRef, blobImage).then((snapShot) => {
+      console.log("file Uploaded")
+    }).then(resp => {
+      getDownloadURL(storageRef).then(async (downloadUrl) => {
+        console.log(downloadUrl)
+        SaveFormData(downloadUrl)
+      })
+    })
+  }
+
+  const SaveFormData = async (imageUrl) => {
+    const docId = Date.now().toString();
+    await setDoc(doc(db, 'Pets', docId), {
+      ...formData,
+      imageUrl: imageUrl,
+      username: user?.fullName,
+      email: user?.primaryEmailAddress.emailAddress,
+      id: docId,
+      userImage: user?.imageUrl
+    })
+    setLoader(false)
+    router.replace('/(tabs)/home')
+
+  }
+
+
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.addnewText}>Add New Pet For Adption</Text>
       <Pressable
         onPress={pickImage}
-        >
+      >
 
         {!image ?
           <Image
@@ -132,11 +176,11 @@ const AddNewPet = () => {
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Age *</Text>
-        <TextInput style={styles.input} 
-        keyboardType='numeric'
-        onChangeText={
-          (value) => handleInputChange('age', value)
-        } 
+        <TextInput style={styles.input}
+          keyboardType='numeric'
+          onChangeText={
+            (value) => handleInputChange('age', value)
+          }
         />
       </View>
 
@@ -159,11 +203,11 @@ const AddNewPet = () => {
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Weight *</Text>
-        <TextInput 
-        keyboardType='numeric'
-        style={styles.input} onChangeText={
-          (value) => handleInputChange('weight', value)
-        } />
+        <TextInput
+          keyboardType='numeric'
+          style={styles.input} onChangeText={
+            (value) => handleInputChange('weight', value)
+          } />
       </View>
 
       <View style={styles.inputcontainer}>
@@ -184,11 +228,16 @@ const AddNewPet = () => {
           } />
       </View>
       <TouchableOpacity
+        disabled={loader}
         onPress={onSumbit}
         style={styles.button}>
-        <Text style={styles.sumbitText}>
-          Sumbit
-        </Text>
+        {loader ?
+          <ActivityIndicator size={"large"} /> :
+          <Text style={styles.sumbitText}>
+            Sumbit
+          </Text>
+        }
+
       </TouchableOpacity>
       <View style={{ padding: 20 }}></View>
 
@@ -211,8 +260,8 @@ const styles = StyleSheet.create({
     width: hp('10%'),
     height: hp('10%'),
     borderRadius: 15,
-    borderWidth:1,
-    borderColor:Colors.PRIMARY
+    borderWidth: 1,
+    borderColor: Colors.PRIMARY
 
   },
   inputcontainer: {

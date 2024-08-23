@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -6,14 +6,16 @@ import Colors from '../../constants/Colors';
 import { Picker } from '@react-native-picker/picker';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/FirebaseConfig';
+import * as ImagePicker from 'expo-image-picker';
 
 const AddNewPet = () => {
   const navigation = useNavigation();
 
   const [formData, setFormData] = useState();
   const [gender, setGender] = useState()
-  const [selectedCategory,setSelectedCategory]=useState()
+  const [selectedCategory, setSelectedCategory] = useState()
   const [categoryList, setCategoryList] = useState([])
+  const [image, setImage] = useState()
 
   useEffect(() => {
     navigation.setOptions({
@@ -23,18 +25,18 @@ const AddNewPet = () => {
   }, [])
 
   //take categories from db
-  
+
   const GetCategories = async () => {
     try {
-      setCategoryList([]); 
+      setCategoryList([]);
       const snapShot = await getDocs(collection(db, "Category"));
       const categories = [];
       snapShot.forEach((doc) => {
-        categories.push(doc.data()); 
+        categories.push(doc.data());
       });
-      setCategoryList(categories); 
+      setCategoryList(categories);
     } catch (error) {
-      console.error("Error fetching categories: ", error); 
+      console.error("Error fetching categories: ", error);
     }
   }
 
@@ -45,18 +47,46 @@ const AddNewPet = () => {
     }))
   }
 
-  const onSumbit=()=>{
+  const onSumbit = () => {
     console.log(formData)
   }
+
+  // used to image picker from gallery
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.addnewText}>Add New Pet For Adption</Text>
-      <View style={styles.imageview}>
-        <Image
-          source={require("../../assets/images/paws.png")}
-          style={styles.pawimage}
-        />
-      </View>
+      <Pressable
+        onPress={pickImage}
+        >
+
+        {!image ?
+          <Image
+            source={require("../../assets/images/paws.png")}
+            style={styles.pawimage}
+          /> :
+          <Image
+            source={{ uri: image }}
+            style={styles.pawimage}
+          />
+        }
+
+      </Pressable>
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Pet Name*</Text>
@@ -70,19 +100,19 @@ const AddNewPet = () => {
         <Picker
           selectedValue={selectedCategory}
           style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>{
+          onValueChange={(itemValue, itemIndex) => {
             setSelectedCategory(itemValue),
-            handleInputChange('category',itemValue)
-          
+              handleInputChange('category', itemValue)
+
           }
           }>
-            {
-              categoryList.map((category,index)=>(
-                <Picker.Item label={category.name} value={category.name} key={index}/>
-              ))
-            }
-            
-         
+          {
+            categoryList.map((category, index) => (
+              <Picker.Item label={category.name} value={category.name} key={index} />
+            ))
+          }
+
+
         </Picker>
       </View>
 
@@ -105,10 +135,10 @@ const AddNewPet = () => {
         <Picker
           selectedValue={gender}
           style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>{
+          onValueChange={(itemValue, itemIndex) => {
             setGender(itemValue),
-            handleInputChange('sex',itemValue)
-          
+              handleInputChange('sex', itemValue)
+
           }
           }>
           <Picker.Item label="Male" value="Male" />
@@ -141,7 +171,7 @@ const AddNewPet = () => {
             (value) => handleInputChange('about', value)
           } />
       </View>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={onSumbit}
         style={styles.button}>
         <Text style={styles.sumbitText}>
@@ -163,23 +193,14 @@ const styles = StyleSheet.create({
   addnewText: {
     fontFamily: "outfit-medium",
     fontSize: hp('2.3%'),
-    color:Colors.PRIMARY
+    color: Colors.PRIMARY
   },
   pawimage: {
-    width: hp('8%'),
-    height: hp('8s%'),
+    width: hp('10%'),
+    height: hp('10%'),
     borderRadius: 15,
 
 
-  },
-  imageview: {
-    borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: hp('12%'),
-    borderRadius: 15,
-    height: hp('12%'),
-    borderColor: Colors.PRIMARY
   },
   inputcontainer: {
     marginVertical: hp('1.5%')
@@ -193,7 +214,7 @@ const styles = StyleSheet.create({
   label: {
     marginVertical: hp('0.7%'),
     fontFamily: "outfit",
-    color:Colors.PRIMARY
+    color: Colors.PRIMARY
 
   },
   button: {

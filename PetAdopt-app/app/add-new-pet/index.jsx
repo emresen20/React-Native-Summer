@@ -44,6 +44,10 @@ const AddNewPet = () => {
       [fieldName]: fieldValue
     }))
   }
+
+  const onSumbit=()=>{
+    console.log(formData)
+  }
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.addnewText}>Add New Pet For Adption</Text>
@@ -137,7 +141,9 @@ const AddNewPet = () => {
             (value) => handleInputChange('about', value)
           } />
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity 
+        onPress={onSumbit}
+        style={styles.button}>
         <Text style={styles.sumbitText}>
           Sumbit
         </Text>
@@ -156,7 +162,8 @@ const styles = StyleSheet.create({
   },
   addnewText: {
     fontFamily: "outfit-medium",
-    fontSize: hp('2.3%')
+    fontSize: hp('2.3%'),
+    color:Colors.PRIMARY
   },
   pawimage: {
     width: hp('8%'),
@@ -172,7 +179,7 @@ const styles = StyleSheet.create({
     width: hp('12%'),
     borderRadius: 15,
     height: hp('12%'),
-    borderColor: Colors.GRAY
+    borderColor: Colors.PRIMARY
   },
   inputcontainer: {
     marginVertical: hp('1.5%')
@@ -186,6 +193,7 @@ const styles = StyleSheet.create({
   label: {
     marginVertical: hp('0.7%'),
     fontFamily: "outfit",
+    color:Colors.PRIMARY
 
   },
   button: {

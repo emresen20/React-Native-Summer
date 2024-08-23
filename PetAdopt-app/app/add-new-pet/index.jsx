@@ -3,19 +3,40 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../config/FirebaseConfig';
 
 const AddNewPet = () => {
   const navigation = useNavigation();
 
   const [formData, setFormData] = useState();
-  const [gender,setGender]=useState()
+  const [gender, setGender] = useState()
+  const [selectedCategory,setSelectedCategory]=useState()
+  const [categoryList, setCategoryList] = useState([])
 
   useEffect(() => {
     navigation.setOptions({
       headerTitle: "Add New Pet"
     })
+    GetCategories()
   }, [])
+
+  //take categories from db
+  
+  const GetCategories = async () => {
+    try {
+      setCategoryList([]); 
+      const snapShot = await getDocs(collection(db, "Category"));
+      const categories = [];
+      snapShot.forEach((doc) => {
+        categories.push(doc.data()); 
+      });
+      setCategoryList(categories); 
+    } catch (error) {
+      console.error("Error fetching categories: ", error); 
+    }
+  }
 
   const handleInputChange = (fieldName, fieldValue) => {
     setFormData(prev => ({
@@ -41,6 +62,27 @@ const AddNewPet = () => {
       </View>
 
       <View style={styles.inputcontainer}>
+        <Text style={styles.label}> Pet Category *</Text>
+        <Picker
+          selectedValue={selectedCategory}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>{
+            setSelectedCategory(itemValue),
+            handleInputChange('category',itemValue)
+          
+          }
+          }>
+            {
+              categoryList.map((category,index)=>(
+                <Picker.Item label={category.name} value={category.name} key={index}/>
+              ))
+            }
+            
+         
+        </Picker>
+      </View>
+
+      <View style={styles.inputcontainer}>
         <Text style={styles.label}>Breed *</Text>
         <TextInput style={styles.input} onChangeText={
           (value) => handleInputChange('breed', value)
@@ -54,14 +96,22 @@ const AddNewPet = () => {
         } />
       </View>
 
-      <Picker
-        selectedValue={gender}
-        onValueChange={(itemValue, itemIndex) =>
-          setGender(itemValue)
-        }>
-        <Picker.Item label="Male" value="Male" />
-        <Picker.Item label="Female" value="Female" />
-      </Picker>
+      <View style={styles.inputcontainer}>
+        <Text style={styles.label}>Gender *</Text>
+        <Picker
+          selectedValue={gender}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>{
+            setGender(itemValue),
+            handleInputChange('sex',itemValue)
+          
+          }
+          }>
+          <Picker.Item label="Male" value="Male" />
+          <Picker.Item label="Female" value="Female" />
+        </Picker>
+      </View>
+
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Weight *</Text>

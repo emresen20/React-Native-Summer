@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, Pressable } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, Pressable, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from 'expo-router'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -11,7 +11,10 @@ import * as ImagePicker from 'expo-image-picker';
 const AddNewPet = () => {
   const navigation = useNavigation();
 
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({
+    category:"Dogs",
+    sex:"Male"
+  });
   const [gender, setGender] = useState()
   const [selectedCategory, setSelectedCategory] = useState()
   const [categoryList, setCategoryList] = useState([])
@@ -48,7 +51,11 @@ const AddNewPet = () => {
   }
 
   const onSumbit = () => {
-    console.log(formData)
+    // object keys arrayin ana başlıklarını döndürür length ile kaç tane olduğunu döndürür.
+   if(Object.keys(formData).length!=8){
+    ToastAndroid.show("Please Enter All Details",ToastAndroid.BOTTOM)
+    return null;
+   }
   }
 
   // used to image picker from gallery
@@ -125,9 +132,12 @@ const AddNewPet = () => {
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Age *</Text>
-        <TextInput style={styles.input} onChangeText={
+        <TextInput style={styles.input} 
+        keyboardType='numeric'
+        onChangeText={
           (value) => handleInputChange('age', value)
-        } />
+        } 
+        />
       </View>
 
       <View style={styles.inputcontainer}>
@@ -149,7 +159,9 @@ const AddNewPet = () => {
 
       <View style={styles.inputcontainer}>
         <Text style={styles.label}>Weight *</Text>
-        <TextInput style={styles.input} onChangeText={
+        <TextInput 
+        keyboardType='numeric'
+        style={styles.input} onChangeText={
           (value) => handleInputChange('weight', value)
         } />
       </View>
@@ -199,7 +211,8 @@ const styles = StyleSheet.create({
     width: hp('10%'),
     height: hp('10%'),
     borderRadius: 15,
-
+    borderWidth:1,
+    borderColor:Colors.PRIMARY
 
   },
   inputcontainer: {

@@ -7,7 +7,7 @@ import MarkFavorite from '../PetDetails/MarkFavorite';
 
 const PetListItem = ({ pet }) => {
   const router = useRouter();
-  console.log(pet)
+  console.log("pet list pet",pet.imageUrl)
   return (
     <TouchableOpacity
       onPress={() => router.push({

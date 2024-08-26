@@ -6,6 +6,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import MarkFavorite from './MarkFavorite';
 
 const PetInfo = ({ pet }) => {
+    console.log("pet",pet.imageUrl)
     return (
         <View>
             <Image source={{ uri: pet.imageUrl }}
@@ -18,7 +19,9 @@ const PetInfo = ({ pet }) => {
                 </View>
                 <MarkFavorite pet={pet} />
             </View>
+            
         </View>
+       
     )
 }
 
